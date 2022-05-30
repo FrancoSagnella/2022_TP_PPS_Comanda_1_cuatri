@@ -1,0 +1,98 @@
+#padre {
+  // background:yellow;
+  z-index: 9999;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #D48500;
+  animation-name: ocultar;
+  animation-duration: 8s;
+  animation-delay: 2.5;
+}
+#hijo {
+  // background: red;
+  width: 350px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#Pizza{
+  right: -51%;
+  width: 350px;
+  position: relative;
+  animation: giraPizza 2s infinite linear;
+}
+#Cuchillo{
+  right: 5.9%;
+  top: 32.5%;
+  width: 180px;
+  position: relative;
+  // animation: inclinaCuchillo 2s infinite linear;
+}
+#Tenedor{
+  right: 90%;
+  top: 32.5%;
+  width: 180px;
+  position: relative;
+  // animation: inclinaTenedor 2s infinite linear;
+}
+
+@keyframes giraPizza{
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(359deg);
+  }
+}
+@keyframes inclinaTenedor {
+  from{
+    transform: rotate(0deg);
+  }
+  50%{
+    transform: rotate(45deg);
+  }
+  to{
+    transform: rotate(0deg);
+  }
+}
+@keyframes inclinaCuchillo {
+  from{
+    transform: rotate(0deg);
+  }
+  50%{
+    transform: rotate(-45deg);
+  }
+  to{
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes ocultar{
+  from{
+    opacity: 1;
+    visibility: visible;
+  }
+  80%{
+    opacity: 1;
+    visibility: visible;
+  }
+  to{
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+#splash{
+    --background:none;
+    // background: url("../assets/Splash.png") no-repeat center /cover;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
