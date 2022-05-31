@@ -9,6 +9,8 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cliente } from 'src/app/clases/cliente';
 import { AuthService } from 'src/app/services/auth.service';
+import { FotoService } from 'src/app/services/foto.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 @Component({
   selector: 'app-alta-cliente',
   templateUrl: './alta-cliente.component.html',
@@ -19,14 +21,17 @@ export class AltaClienteComponent implements OnInit {
 	fotoCargada: any;
  foto:any;
   constructor(private fb:FormBuilder, private afs: AngularFirestore,private firestore:FirestoreService,private route:Router,
-    private camera:Camera,private qr : BarcodeScanner,private storage: AngularFireStorage,public auth:AuthService
+    private camera:Camera,private qr : BarcodeScanner,private storage: AngularFireStorage,public auth:AuthService,
+    private fotoService:FotoService, private usuariosService:UsuariosService
     ) { }
-  cliente:Cliente={id:'',correo:'',clave:'',nombre:'',apellido:'',foto:'',habilitado:false,dni:''};
+  cliente:Cliente={id:'',correo:'',nombre:'',apellido:'',img:'',estado:'PENDIENTE',dni:0,fechaCreacion:0,perfil:'CLIENTE'};
+
 	public barcodeOptions: BarcodeScannerOptions = {
 		prompt: "Colocar el codigo de barras en la linea de escaneo",
 		formats: "QR_CODE,PDF_417",
 		orientation: "landscape"
 	};
+
   ngOnInit() {
 
     this.grupoDeControles=this.fb.group({
@@ -41,65 +46,58 @@ export class AltaClienteComponent implements OnInit {
      // 'comestible':['',[Validators.required]],
       //'localidad':['',Validators.required],
       //'pais':['',Validators.required],
-  
+
     });
-  
+
   }
+
+  get img() { return this.grupoDeControles.get('foto').value; }
+  set img(data: any) { this.grupoDeControles.controls['foto'].setValue(data); }
+
   enviar(){
     console.info("formulario",this.grupoDeControles);
-  //alert(this.cliente.correo)
-
-      
-
-
-     //alert(this.producto.descripcion)
+    //alert(this.cliente.correo)
+    //alert(this.producto.descripcion)
     this.cliente.nombre = this.grupoDeControles.get('nombre')?.value;
     this.cliente.apellido = this.grupoDeControles.get('apellido')?.value;
     this.cliente.correo = this.grupoDeControles.get('correo')?.value;
     this.cliente.dni = this.grupoDeControles.get('dni')?.value;
-    this.cliente.clave = this.grupoDeControles.get('clave')?.value;
-    this.cliente.foto = this.grupoDeControles.get('foto')?.value;
+    // this.cliente.clave = this.grupoDeControles.get('clave')?.value;
+    this.cliente.img = this.grupoDeControles.get('foto')?.value;
+    this.cliente.fechaCreacion = new Date().getTime();
+
     /*this.producto.comestible = this.grupoDeControles.get('comestible')?.value;
     this.producto.pais = this.grupoDeControles.get('pais')?.value;*/
-     //this.repartidor.id=this.afs.createId(); 
-     this.auth.register(this.cliente.correo, this.cliente.clave).then(response => {
-this.cliente.id = response.user.uid;
-      let email = response.user.email;
-    this.cliente.id= this.cliente.id
-    
-    const filePath = `/cliente/${email}/fotoCliente.jpg`;
+    //this.repartidor.id=this.afs.createId();
+    const auth = this.auth.register(this.cliente.correo, this.grupoDeControles.get('clave')?.value).then(response => {
 
+    if (auth) {
+      this.firestore.saveImage(this.img, 'users', new Date().getTime() + '')
+        .then(async url => {
+          this.cliente.img = url;
 
-					this.subirImagen(filePath, this.cliente.foto).then(url => {
-						this.fotoCargada = url;
-						this.cliente.foto = this.fotoCargada;
-						//this.usuarioSvc.AgregarUsuario(JSON.parse(JSON.stringify(this.socio)));
-					});
-          
-          
-          /*let pathRef = `fotos/`+this.cliente.nombre;
-          const fileRef = this.storage.ref(pathRef);
-          const task = this.storage.upload(pathRef, this.foto);  
-          task.snapshotChanges().toPromise().then(() => {
-            fileRef.getDownloadURL().toPromise().then(response => {
-      
-              this.cliente.foto = response;  
-            });
-          });*/
-					this.grupoDeControles.reset();
-    
-   
-    })
-    
-    
-    
-    
-    this.firestore.actualizar('cliente',this.cliente.id,this.cliente).then(()=>{
-      //this.route.navigate(['bienvenido']);
+          await this.usuariosService.alta(this.cliente);
+          // this.vibration.vibrate([500]);
+          // this.toastr.success('Datos guardados con éxito!', 'Registro de Usuario');
+          this.resetForm();
+        });
     }
-    )
-  
+    else {
+      // this.vibration.vibrate([500, 500, 500]);
+      // this.toastr.error("Datos ingresados incorrectos", 'Registro de Usuario');
+    }
+
+    })
+
   }
+
+  resetForm() { this.ngOnInit(); }
+
+  async takePic() {
+    const image = await this.fotoService.addNewToGallery();
+    if (image) { this.img = image; }
+  }
+
   private validadorDeEspacios(control: AbstractControl):null|object{
     let nombre:string=control.value;
     let espacios=nombre.includes(' ');
@@ -113,23 +111,7 @@ this.cliente.id = response.user.uid;
     }
     return null;
   }
-  tomarFotografia() {
-		const options: CameraOptions = {
-			quality: 100,
-			targetHeight: 600,
-			targetWidth: 600,
-			destinationType: this.camera.DestinationType.DATA_URL,
-			encodingType: this.camera.EncodingType.JPEG,
-			mediaType: this.camera.MediaType.PICTURE,
-			correctOrientation: true
-		}
-		this.camera.getPicture(options).then((imageData) => {
-			var base64Str = 'data:image/jpeg;base64,' + imageData;
-			//	this.grupoDeControles.controls.foto.setValue(base64Str);
-        this.grupoDeControles.get('foto')?.setValue(base64Str);
- 
-		});
-	}
+
   escanearDni() {
 		let auxDni;
 		let scanSub = this.qr.scan(this.barcodeOptions).then(dataString => {
@@ -153,21 +135,5 @@ this.cliente.id = response.user.uid;
 			}
 		});
 	}
-
-  public subirImagen(ruta: string, data: any) {
-		return this.storage.ref(ruta).putString(data, 'data_url').then(data => {
-			return data.ref.getDownloadURL().then(x => x);
-		});
-	}
-
-  onSelecFoto(e:any){
-    if(e.target.files && e.target.files[0])
-    {
-      this.foto = e.target.files[0];
-      
-    }
-    this.grupoDeControles.get('foto')?.setValue(this.foto);
-  }
-  
 
 }

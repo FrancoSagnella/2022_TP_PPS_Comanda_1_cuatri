@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Photo } from '@capacitor/camera';
 
 
 @Injectable({
@@ -9,7 +11,7 @@ export class FirestoreService {
 
   private coleccionMensaje:AngularFirestoreCollection<any>;
 
-  constructor(private firestore:AngularFirestore) {
+  constructor(private firestore:AngularFirestore,private storage:AngularFireStorage) {
     this.coleccionMensaje=firestore.collection<any>('mensajes');
    }
 
@@ -32,5 +34,21 @@ export class FirestoreService {
   //Actualiza un dato
   public actualizar(collection: string, documentId: string, data: any) {
     return this.firestore.collection(collection).doc(documentId).set(data);
+  }
+
+  async saveImage(img: Photo, path: string, name: string) {
+    try {
+      const response = await fetch(img.webPath!);
+      const blob = await response.blob();
+      const filePath = path + '/' + name;
+      const uploadTask = this.saveFile(blob, filePath);
+
+      return (await uploadTask).ref.getDownloadURL();
+    }
+    catch (error) { }
+  }
+
+  saveFile(file: Blob, filePath: string) {
+    return this.storage.upload(filePath, file);
   }
 }
