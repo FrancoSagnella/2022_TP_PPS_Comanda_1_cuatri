@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "TP2-PPS",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
