@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { AltaClienteComponent } from './componentes/alta-cliente/alta-cliente.component';
 
 const routes: Routes = [
   {path:'bienvenida', component:AppComponent},
-  {path:'altaCliente', component:AltaClienteComponent},
   {
     path: 'usuarios',
     loadChildren: () => import('./paginas/usuarios/usuarios.module').then(m => m.UsuariosModule),
