@@ -14,7 +14,7 @@
 }
 #hijo {
   // background: red;
-  width: 350px;
+  width: 1000px;
   position: absolute;
   display: flex;
   justify-content: center;
@@ -22,24 +22,30 @@
 }
 
 #Pizza{
-  right: -51%;
+  right: -18.5%;
   width: 350px;
   position: relative;
   animation: giraPizza 2s infinite linear;
 }
 #Cuchillo{
-  right: 5.9%;
+  right: 1.5%;
   top: 32.5%;
   width: 180px;
   position: relative;
   // animation: inclinaCuchillo 2s infinite linear;
 }
 #Tenedor{
-  right: 90%;
+  right: 31%;
   top: 32.5%;
   width: 180px;
   position: relative;
   // animation: inclinaTenedor 2s infinite linear;
+}
+#Lazito{
+  right: 25.3%;
+  top: 60%;
+  width: 500px;
+  position: absolute;
 }
 
 @keyframes giraPizza{
