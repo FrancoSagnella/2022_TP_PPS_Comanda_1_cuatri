@@ -6,7 +6,11 @@ import { AltaClienteComponent } from './componentes/alta-cliente/alta-cliente.co
 const routes: Routes = [
   {path:'bienvenida', component:AppComponent},
   {path:'altaCliente', component:AltaClienteComponent},
-  {path:'**', redirectTo:'bienvenida', pathMatch:'full'}
+  {
+    path: 'usuarios',
+    loadChildren: () => import('./paginas/usuarios/usuarios.module').then(m => m.UsuariosModule),
+  },
+  {path:'**', redirectTo:'bienvenida', pathMatch:'full'},
 ];
 @NgModule({
   imports: [

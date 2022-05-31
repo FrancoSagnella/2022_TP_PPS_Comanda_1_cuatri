@@ -14,18 +14,23 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AltaClienteComponent } from './componentes/alta-cliente/alta-cliente.component';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+import { SplashComponent } from './splash/splash.component';
+import { UsuariosModule } from './paginas/usuarios/usuarios.module';
 
 @NgModule({
   declarations: [AppComponent,
-  AltaClienteComponent
+  AltaClienteComponent,SplashComponent
   ],
+
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
             FormsModule,
             AngularFireModule.initializeApp(environment.firebaseConfig),
             ReactiveFormsModule,
-            AngularFirestoreModule],
+            AngularFirestoreModule,
+            UsuariosModule],
   providers: [Camera,BarcodeScanner,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}
