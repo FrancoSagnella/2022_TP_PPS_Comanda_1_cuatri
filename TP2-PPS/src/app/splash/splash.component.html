@@ -1,4 +1,4 @@
-<div id="padre" >
+<div id="padre" [syle.display]="splash ? 'flex' : 'none'" *ngIf="splash">
   <div id="hijo">
     <img id="Pizza" src="../assets/pizza.png">
     <img id="Cuchillo" class="imagenes" src="../assets/Cuchillo.png">
@@ -6,4 +6,3 @@
     <img id="Lazito" class="imagenes" src="../assets/Lazito.png">
   </div>
 </div>
-<!-- [syle.display]="splash ? 'flex' : 'none'" *ngIf="splash" -->
