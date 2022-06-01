@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MailService } from 'src/app/services/mail.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -29,7 +30,7 @@ export class ListadoComponent implements OnInit {
 
   constructor(
     private userService: UsuariosService,
-    // private mailService: MailService,
+    private mailService: MailService,
     private router: Router,
     // public navCtrl: NavController
   ) { }
@@ -75,7 +76,7 @@ export class ListadoComponent implements OnInit {
   setStatus($event, user) {
     user.estado = $event.target.value;
     this.userService.setOne(user);
-    // this.mailService.notificationStatus(user);
+    this.mailService.notificationStatus(user);
   }
 
 }
