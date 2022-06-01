@@ -1,0 +1,30 @@
+.loading {
+  width: 300px;
+  height: 300px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 300;
+  animation: giraPizza 1s linear infinite;
+  border-radius: 100px;
+}
+
+.loadingContainer {
+  width: 100%;
+  height: 1000vh;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.247);
+  z-index: 299;
+}
+
+@keyframes giraPizza{
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(359deg);
+  }
+}

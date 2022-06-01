@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { MailService } from 'src/app/services/mail.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -32,12 +33,12 @@ export class ListadoComponent implements OnInit {
     private userService: UsuariosService,
     private mailService: MailService,
     private router: Router,
-    // public navCtrl: NavController
+    public navCtrl: NavController
   ) { }
 
 
   navigateBack(){
-    // this.navCtrl.back();
+    this.navCtrl.back();
   }
   ngOnInit() {
     this.profileSelected = this.profiles[0];

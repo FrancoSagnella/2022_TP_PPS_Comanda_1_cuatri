@@ -1,11 +1,6 @@
 <ion-content *ngIf="this.user">
 
-  <div class="loadingContainer" id="loadingContainer" hidden>
-    <!-- <app-spinner></app-spinner> -->
-    <div class="loading">
-      <img src="../../../assets/images/icono.png">
-    </div>
-  </div>
+  <app-spinner *ngIf="this.spinner"></app-spinner>
 
   <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="redirectTo('user/profile')">
     <ion-fab-button>
