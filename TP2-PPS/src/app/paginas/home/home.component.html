@@ -1,0 +1,60 @@
+<ion-content *ngIf="this.user">
+
+  <div class="loadingContainer" id="loadingContainer" hidden>
+    <!-- <app-spinner></app-spinner> -->
+    <div class="loading">
+      <img src="../../../assets/images/icono.png">
+    </div>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="redirectTo('user/profile')">
+    <ion-fab-button>
+      <img src="{{ user.img }}" alt="">
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- el usuario con mesa asignada-->
+  <ion-fab  *ngIf="this.user.perfil == 'CLIENTE' || this.user.perfil == 'ANONIMO'"
+   vertical="top" horizontal="start" slot="fixed" (click)="redirectTo('chat')">
+    <ion-fab-button>
+      <img src="./../../../assets/images/consulta.png" alt="">
+    </ion-fab-button>
+  </ion-fab>
+
+  <!--que solopuedan acceder el mozo  -->
+  <ion-fab *ngIf="this.user.perfil == 'MOZO'"
+  vertical="top" horizontal="start" slot="fixed" (click)="redirectTo('chat-mozo')">
+    <ion-fab-button>
+      <img src="./../../../assets/images/consulta.png" alt="">
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <div class="container-cards">
+    <div style="all:unset;" *ngFor="let link of this.links">
+      <ion-card *ngIf="this.user.perfil == link.profile || this.user?.rol == link.profile" class="card-shadow"
+        (click)="redirectTo(link.url)">
+
+        <img src="{{ link.img }}" />
+        <div class="text-img">
+          <p>{{ link.title }}</p>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+
+  <ion-fab (click)="redirectTo('user/profile')" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <img src="{{ user.img }}" alt="">
+    </ion-fab-button>
+  </ion-fab>
+
+  <app-scanner *ngIf="this.user.perfil == 'CLIENTE' || this.user.perfil == 'ANONIMO'"></app-scanner>
+
+  <ion-fab (click)="redirectTo('user/logout')" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="log-out"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

@@ -7,10 +7,12 @@ import { AltaClienteComponent } from './altas/alta-cliente/alta-cliente.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { IonicModule } from '@ionic/angular';
+import { LoginComponent } from './login/login.component';
+import { ListadoComponent } from './listado/listado.component';
 
 
 @NgModule({
-  declarations: [AltaDuenioSupervisorComponent, AltaClienteComponent],
+  declarations: [AltaDuenioSupervisorComponent, AltaClienteComponent, LoginComponent, ListadoComponent],
   imports: [
     CommonModule,
     UsuariosRoutingModule,

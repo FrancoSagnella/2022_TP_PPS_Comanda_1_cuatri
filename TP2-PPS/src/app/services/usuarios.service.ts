@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Cliente } from '../clases/cliente';
 import { Duenio } from '../clases/duenio';
 import { Supervisor } from '../clases/supervisor';
@@ -24,5 +26,56 @@ export class UsuariosService {
       return result;
     }
     catch (err) { console.log(err); }
+  }
+
+  public async setOne(model: Duenio | Supervisor | Cliente ) {
+    try {
+      return this.referencia.doc(model.id).set({ ...model }); }
+    catch (err) { console.log(err); }
+  }
+
+  getDuenios() {
+    return this.getByPerfil('DUENIO') as Observable<Duenio[]>;
+  }
+
+  getSupervisores() {
+    return this.getByPerfil('SUPERVISOR') as Observable<Supervisor[]>;
+  }
+
+  getClientes() {
+    return this.getByPerfil('CLIENTE') as Observable<Cliente[]>;
+  }
+
+  // getEmpleados() {
+  //   return this.getByPerfil('EMPLEADO') as Observable<Empleado[]>;
+  // }
+
+  // getAnonimos() {
+  //   return this.getByPerfil('ANONIMO') as Observable<Anonimo[]>;
+  // }
+
+  private getByPerfil(perfil: string) {
+    try {
+      return this.getAll().pipe(
+        map(users => users.filter(u => u.perfil.includes(perfil))));
+    }
+    catch (error) { }
+  }
+
+  getAll() {
+    try {
+      return this.referencia.snapshotChanges().pipe(
+        map(users => users.map(a => a.payload.doc.data()))
+      );
+    }
+    catch (error) { }
+  }
+
+  getByEmail(email: string) {
+    try {
+      return this.getAll().pipe(
+        map(users => users.find(u => u.correo == email)));
+    }
+    catch (error) { }
   }
 }

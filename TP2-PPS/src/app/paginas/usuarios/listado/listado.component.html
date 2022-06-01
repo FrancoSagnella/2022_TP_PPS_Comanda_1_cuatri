@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button (click)="navigateBack()" slot="start"></ion-back-button>
+    <ion-title>Listado de usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container-cards">
+    <div style="all:unset;" *ngFor="let user of this.users$ | async">
+      <ion-card class="card-shadow">
+        <img src="{{ user.img }}" />
+
+        <div class="details">
+          <p>{{ user.perfil }}</p>
+          <p>{{ user.correo }}</p>
+
+          <ion-select value="{{ user.estado }}" cancelText="Cancelar" okText="Confirmar"
+            (ionChange)="setStatus($event, user)">
+            <ion-select-option *ngFor="let sta of this.status">{{ sta.val }}</ion-select-option>
+          </ion-select>
+
+        </div>
+      </ion-card>
+    </div>
+  </div>
+
+  <ion-fab (click)="redirectTo('home')" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="home"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>{{ this.profileSelected.val }}</ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngFor="let p of this.profiles" (click)="setFilter(p)">
+        <p>{{p.val}}</p>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>
