@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
   }
 
   async onAnonymous() {
-      this.redirectTo('user/register/anonimo');
+      this.redirectTo('usuarios/altaAnonimo');
   }
 
 
