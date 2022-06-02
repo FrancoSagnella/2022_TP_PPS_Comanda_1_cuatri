@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Anonimo } from '../clases/anonimo';
 import { Cliente } from '../clases/cliente';
 import { Duenio } from '../clases/duenio';
 import { Supervisor } from '../clases/supervisor';
@@ -19,7 +20,7 @@ export class UsuariosService {
       (this.coleccion, ref => ref.orderBy('fechaCreacion', 'asc'));
   }
 
-  public async alta(model: Duenio | Supervisor | Cliente ) {
+  public async alta(model: Duenio | Supervisor | Cliente | Anonimo ) {
     try {
       model.id = this.bd.createId();
       const result = this.referencia.doc(model.id).set({ ...model });

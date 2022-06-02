@@ -1,5 +1,5 @@
 import { Usuario } from "./usuario";
 
-export class Cliente extends Usuario {
+export class Anonimo extends Usuario {
   public perfil: 'ANONIMO' = 'ANONIMO'
 }

@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button (click)="navigateBack()" slot="start"></ion-back-button>
+ 
+  <ion-title size="small">Registrarse como Anónimo</ion-title>
+  </ion-toolbar>
+ </ion-header> 
+
+<ion-content>
+  <ion-fab (click)="takePic()" vertical="top" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-card id="card-img">
+    <ion-card-content>
+      <ion-img *ngIf="this.img; else no_img" [src]="this.img.webPath"></ion-img>
+
+      <ng-template #no_img>
+        <ion-img src="assets/images/default.jpg"></ion-img>
+      </ng-template>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+
+      <form [formGroup]="form" (ngSubmit)="onRegister()">
+        
+        <ion-item>
+          <ion-input type="text" name="name" formControlName="name" placeholder="Nombre..">
+            <ion-icon name="logo-reddit"></ion-icon>
+          </ion-input>
+        </ion-item>
+
+        <ng-container *ngFor="let validation of validationUserMessage.name">
+          <div class="error_message"
+            *ngIf="form.get('name').hasError(validation.type) && (form.get('name').dirty || form.get('name').touched)">
+            {{validation.message}}
+          </div>
+        </ng-container>        
+
+        <ion-button shape="round" type="submit" fill="solid" class="sign-btn" [disabled]="!form.valid">
+          Ingresar
+        </ion-button>
+
+      </form>    
+
+    </ion-card-content>   
+
+  </ion-card>  
+
+</ion-content>
+
+<ion-footer>
+  <p>¿Tienes una cuenta?</p>
+  <ion-button (click)="redirectTo('user/login')" size="small" shape="round" type="submit" fill="solid" class="sign-btn">
+    Inicia Sesíon</ion-button>
+</ion-footer>
