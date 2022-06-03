@@ -24,3 +24,125 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+// @font-face {
+//   font-family: "Righteous-Regular";
+//   src: url("./assets/fonts/Righteous-Regular.ttf");
+// }
+
+body,
+.alert-wrapper {
+  --ion-background-color: none;
+
+  // https://cssgradient.io/
+  background: rgb(255, 255, 118) !important;
+}
+
+// p,
+// h1,
+// ion-button,
+// ion-fab,
+// ion-item,
+// ion-toolbar,
+// ion-input,
+// ion-icon,
+
+// ion-select,
+// ion-card-subtitle,
+// ion-card-title,
+// .alert-title,
+// .alert-radio-label {
+//   font-family: "Righteous-Regular" !important;
+//   color: #1e1b3f !important;
+// }
+
+// .error_message {
+//   font-family: "Righteous-Regular";
+//   font-size: 100%;
+//   color: red;
+// }
+
+// .alert-button-inner {
+//   font-family: "Righteous-Regular" !important;
+// }
+
+ion-content,
+ion-header,
+ion-footer {
+  text-align: center;
+}
+
+ion-header,
+ion-card,
+ion-footer {
+  --background: none;
+  background: rgb(255, 166, 0)
+}
+
+// ion-fab-button:hover,
+// ion-button:hover {
+//   animation-name: rotate;
+//   animation-duration: 1s;
+// }
+
+ion-fab,
+ion-fab-button,
+ion-fab-list,
+ion-button{
+  --background: rgb(165, 11, 11);
+}
+
+ion-footer {
+  display: flex;
+  justify-content: space-between;
+
+  p,
+  ion-button {
+    margin: 0.25rem;
+  }
+}
+
+ion-fab{
+  position: absolute;
+}
+
+ion-fab-button {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.container-cards {
+  margin-top: 10%;
+  margin-bottom: 20%;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotateZ(0deg);
+  }
+
+  50% {
+    transform: rotateY(180deg) translate(0px, 0px); //skew(-3deg, 20deg);
+  }
+}
+
+@keyframes rightIn {
+  from {
+    margin-left: 80%;
+  }
+
+  to {
+    margin-left: 0%;
+  }
+}
+
+@keyframes leftIn {
+  from {
+    margin-right: 80%;
+  }
+
+  to {
+    margin-right: 0%;
+  }
+}

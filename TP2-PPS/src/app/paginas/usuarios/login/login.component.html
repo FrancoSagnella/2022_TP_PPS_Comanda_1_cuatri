@@ -1,7 +1,7 @@
 <ion-content>
 
   <div class="container-img">
-    <ion-img src="assets/icon/favicon.png"></ion-img>
+    <ion-img src="assets/splashpng.png"></ion-img>
   </div>
 
   <ion-card>
@@ -11,7 +11,6 @@
         <div class="wrapform">
           <ion-item>
             <ion-input type="text" name="email" formControlName="email" placeholder="Correo">
-              <ion-icon name="mail-outline"></ion-icon>
             </ion-input>
           </ion-item>
           <div>
@@ -24,8 +23,7 @@
           </div>
 
           <ion-item>
-            <ion-input type="password" name="password" formControlName="password" placeholder="**************">
-              <ion-icon name="lock-closed-outline"></ion-icon>
+            <ion-input type="password" name="password" formControlName="password" placeholder="Clave...">
             </ion-input>
           </ion-item>
 
@@ -75,14 +73,15 @@
     </ion-fab-list>
   </ion-fab>
 
-  <ion-fab (click)="onAnonymous()" vertical="bottom" horizontal="start" slot="fixed">
+  <!-- <ion-fab (click)="onAnonymous()" vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button id="anonymus"> ❓ </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->
 </ion-content>
 
 
 <ion-footer>
-  <p>¿No tienes una cuenta?</p>
-  <ion-button (click)="redirectTo('usuarios/altaCliente')" size="small" shape="round" fill="solid" class="sign-btn">
-    Regístrate</ion-button>
+  <ion-button (click)="onAnonymous()" size="" shape="round" fill="solid" class="sign-btn">
+    Anónimo</ion-button>
+  <ion-button (click)="redirectTo('usuarios/altaCliente')" size="" shape="round" fill="solid" class="sign-btn">
+    Registrarse</ion-button>
 </ion-footer>
