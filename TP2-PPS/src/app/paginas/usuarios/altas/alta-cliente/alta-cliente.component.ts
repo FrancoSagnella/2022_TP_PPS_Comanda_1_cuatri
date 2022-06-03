@@ -173,5 +173,9 @@ export class AltaClienteComponent implements OnInit {
 			}
 		});
 	}
+  redirectTo(path: string) {
+    this.route.navigate([path]);
+  }
 
+  
 }
