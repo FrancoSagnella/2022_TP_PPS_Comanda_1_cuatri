@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-back-button (click)="navigateBack()" slot="start"></ion-back-button>
- 
+
   <ion-title size="small">Registrarse como Anónimo</ion-title>
   </ion-toolbar>
- </ion-header> 
+ </ion-header>
 
 <ion-content>
   <ion-fab (click)="takePic()" vertical="top" horizontal="end">
@@ -28,10 +28,9 @@
     <ion-card-content>
 
       <form [formGroup]="form" (ngSubmit)="onRegister()">
-        
+
         <ion-item>
           <ion-input type="text" name="name" formControlName="name" placeholder="Nombre..">
-            <ion-icon name="logo-reddit"></ion-icon>
           </ion-input>
         </ion-item>
 
@@ -40,17 +39,17 @@
             *ngIf="form.get('name').hasError(validation.type) && (form.get('name').dirty || form.get('name').touched)">
             {{validation.message}}
           </div>
-        </ng-container>        
+        </ng-container>
 
         <ion-button shape="round" type="submit" fill="solid" class="sign-btn" [disabled]="!form.valid">
           Ingresar
         </ion-button>
 
-      </form>    
+      </form>
 
-    </ion-card-content>   
+    </ion-card-content>
 
-  </ion-card>  
+  </ion-card>
 
 </ion-content>
 

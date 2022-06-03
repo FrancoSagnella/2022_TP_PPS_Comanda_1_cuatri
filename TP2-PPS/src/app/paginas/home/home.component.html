@@ -2,11 +2,11 @@
 
   <app-spinner *ngIf="this.spinner"></app-spinner>
 
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="redirectTo('user/profile')">
+  <!-- <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="redirectTo('user/profile')">
     <ion-fab-button>
       <img src="{{ user.img }}" alt="">
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->
 
   <!-- el usuario con mesa asignada-->
   <ion-fab  *ngIf="this.user.perfil == 'CLIENTE' || this.user.perfil == 'ANONIMO'"
@@ -32,17 +32,17 @@
 
         <img src="{{ link.img }}" />
         <div class="text-img">
-          <p>{{ link.title }}</p>
+          <h3>{{ link.title }}</h3>
         </div>
       </ion-card>
     </div>
   </div>
 
-  <ion-fab (click)="redirectTo('user/profile')" vertical="bottom" horizontal="start" slot="fixed">
+  <!-- <ion-fab (click)="redirectTo('user/profile')" vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button>
       <img src="{{ user.img }}" alt="">
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->
 
   <app-scanner *ngIf="this.user.perfil == 'CLIENTE' || this.user.perfil == 'ANONIMO'"></app-scanner>
 
