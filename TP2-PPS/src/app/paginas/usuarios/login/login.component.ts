@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { MailService } from 'src/app/services/mail.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -38,7 +40,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     // private vibration: Vibration,
-    // private toastr: ToastService,
+    private toastr: ToastController
+    ,
     private formbuider: FormBuilder,
     private authService: AuthService,
     private userService: UsuariosService,
@@ -88,14 +91,16 @@ export class LoginComponent implements OnInit {
           // this.vibration.vibrate([500]);
           localStorage.setItem('user', JSON.stringify(data));
           // this.toastr.success('Ingreso con éxito', 'Iniciar Sesión');
+          this.presentToast('Sesión iniciada', 2000, 'success', 'Inicio exitoso');
           this.redirectTo('/home');
         }
         else {
           // this.vibration.vibrate([500, 500, 500]);
           // this.toastr.error('Aún no fue habilitado por administración, sea paciente', 'Iniciar Sesión');
+          this.presentToast('Su usuario todavía no fue autorizado', 2000, 'danger', 'No se inició sesión');
         }
       }
-      // else { this.toastr.error('Email/Contraseña Incorrecto', 'Iniciar Sesión'); }
+      else { this.presentToast('Contraseña incorrecta', 2000, 'danger', 'No se inicio sesión') }
       sub.unsubscribe();
     });
 
@@ -104,5 +109,28 @@ export class LoginComponent implements OnInit {
 
   redirectTo(path: string) {
     this.router.navigate([path]);
+  }
+
+
+  async presentToast(mensaje: string, duracion: number, color: string, titulo: string, boton?: boolean,
+    tituloBotonUno?: string, tituloBotonDos?: string, urlUno?: string, urlDos?: string) {
+    let toast;
+    if (boton) {
+      toast = await this.toastr.create({
+        message: mensaje,
+        duration: duracion,
+        color: color,
+        header: titulo,
+      });
+    }
+    else {
+      toast = await this.toastr.create({
+        message: mensaje,
+        duration: duracion,
+        color: color,
+        header: titulo
+      });
+    }
+    toast.present();
   }
 }

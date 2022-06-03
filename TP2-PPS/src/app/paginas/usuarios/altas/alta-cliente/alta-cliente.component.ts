@@ -11,6 +11,8 @@ import { Cliente } from 'src/app/clases/cliente';
 import { AuthService } from 'src/app/services/auth.service';
 import { FotoService } from 'src/app/services/foto.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { ToastrService } from 'ngx-toastr';
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-alta-cliente',
   templateUrl: './alta-cliente.component.html',
@@ -55,7 +57,7 @@ export class AltaClienteComponent implements OnInit {
 }
   constructor(private fb:FormBuilder, private afs: AngularFirestore,private firestore:FirestoreService,private route:Router,
     private camera:Camera,private qr : BarcodeScanner,private storage: AngularFireStorage,public auth:AuthService,
-    private fotoService:FotoService, private usuariosService:UsuariosService
+    private fotoService:FotoService, private usuariosService:UsuariosService,private toastr:ToastController
     ) { }
   cliente:Cliente={id:'',correo:'',nombre:'',apellido:'',img:'',estado:'PENDIENTE',dni:0,fechaCreacion:0,perfil:'CLIENTE'};
 
@@ -113,12 +115,14 @@ export class AltaClienteComponent implements OnInit {
           await this.usuariosService.alta(this.cliente);
           // this.vibration.vibrate([500]);
           // this.toastr.success('Datos guardados con éxito!', 'Registro de Usuario');
+          this.presentToast('Datos guardados con exito', 2000, 'success', 'Alta exitosa');
           this.resetForm();
         });
     }
     else {
       // this.vibration.vibrate([500, 500, 500]);
       // this.toastr.error("Datos ingresados incorrectos", 'Registro de Usuario');
+      this.presentToast('Datos incorrectos', 2000, 'danger', 'registro incorrecto');
     }
 
     })
@@ -177,5 +181,26 @@ export class AltaClienteComponent implements OnInit {
     this.route.navigate([path]);
   }
 
-  
+
+  async presentToast(mensaje: string, duracion: number, color: string, titulo: string, boton?: boolean,
+    tituloBotonUno?: string, tituloBotonDos?: string, urlUno?: string, urlDos?: string) {
+    let toast;
+    if (boton) {
+      toast = await this.toastr.create({
+        message: mensaje,
+        duration: duracion,
+        color: color,
+        header: titulo,
+      });
+    }
+    else {
+      toast = await this.toastr.create({
+        message: mensaje,
+        duration: duracion,
+        color: color,
+        header: titulo
+      });
+    }
+    toast.present();
+  }
 }

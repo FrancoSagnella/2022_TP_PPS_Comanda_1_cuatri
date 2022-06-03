@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { FotoService } from 'src/app/services/foto.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { ToastrService } from 'ngx-toastr';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-alta-duenio-supervisor',
@@ -74,6 +76,7 @@ export class AltaDuenioSupervisorComponent implements OnInit {
     private router: Router,
     // private vibration: Vibration,
     // public toastr: ToastrService,
+    private toastr:ToastController,
     private formbuider: FormBuilder,
     private authService: AuthService,
     private usuariosService: UsuariosService,
@@ -175,11 +178,13 @@ export class AltaDuenioSupervisorComponent implements OnInit {
           await this.usuariosService.alta(user);
           // this.vibration.vibrate([500]);
           // this.toastr.success('Datos guardados con éxito!', 'Registro de Usuario');
+          this.presentToast('Datos guardados con exito', 2000, 'success', 'Alta exitosa');
           this.resetForm();
         });
     }
     else {
       // this.vibration.vibrate([500, 500, 500]);
+      this.presentToast('Datos incorrectos', 2000, 'danger', 'Alta denegada');
       // this.toastr.error("Datos ingresados incorrectos", 'Registro de Usuario');
     }
   }
@@ -223,4 +228,26 @@ export class AltaDuenioSupervisorComponent implements OnInit {
   }
 
   resetForm() { this.ngOnInit(); }
+
+  async presentToast(mensaje: string, duracion: number, color: string, titulo: string, boton?: boolean,
+    tituloBotonUno?: string, tituloBotonDos?: string, urlUno?: string, urlDos?: string) {
+    let toast;
+    if (boton) {
+      toast = await this.toastr.create({
+        message: mensaje,
+        duration: duracion,
+        color: color,
+        header: titulo,
+      });
+    }
+    else {
+      toast = await this.toastr.create({
+        message: mensaje,
+        duration: duracion,
+        color: color,
+        header: titulo
+      });
+    }
+    toast.present();
+  }
 }

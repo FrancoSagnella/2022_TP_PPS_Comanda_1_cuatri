@@ -17,6 +17,9 @@ import { SplashComponent } from './splash/splash.component';
 import { UsuariosModule } from './paginas/usuarios/usuarios.module';
 import { HomeComponent } from './paginas/home/home.component';
 import { SpinnerComponent } from './paginas/spinner/spinner.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
 
 @NgModule({
   declarations: [AppComponent,
@@ -31,7 +34,13 @@ import { SpinnerComponent } from './paginas/spinner/spinner.component';
             AngularFireModule.initializeApp(environment.firebaseConfig),
             ReactiveFormsModule,
             AngularFirestoreModule,
-            UsuariosModule],
+            UsuariosModule,
+            BrowserAnimationsModule,
+            ToastrModule.forRoot({
+              positionClass: 'toast-top-center',
+              preventDuplicates: true,
+              progressBar: true
+            })],
   providers: [Camera,BarcodeScanner,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
 
   bootstrap: [AppComponent],
