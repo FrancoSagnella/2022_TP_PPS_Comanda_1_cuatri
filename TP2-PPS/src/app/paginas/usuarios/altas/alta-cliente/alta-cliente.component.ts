@@ -20,6 +20,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class AltaClienteComponent implements OnInit {
   public grupoDeControles!:FormGroup
+  private spinner = false;
 	fotoCargada: any;
  foto:any;
 
@@ -91,6 +92,7 @@ export class AltaClienteComponent implements OnInit {
   set img(data: any) { this.grupoDeControles.controls['foto'].setValue(data); }
 
   enviar(){
+    this.spinner = true;
     console.info("formulario",this.grupoDeControles);
     //alert(this.cliente.correo)
     //alert(this.producto.descripcion)
@@ -116,12 +118,15 @@ export class AltaClienteComponent implements OnInit {
           // this.vibration.vibrate([500]);
           // this.toastr.success('Datos guardados con éxito!', 'Registro de Usuario');
           this.presentToast('Datos guardados con exito', 2000, 'success', 'Alta exitosa');
+          this.spinner = false;
+          this.route.navigateByUrl('usuarios/login');
           this.resetForm();
         });
     }
     else {
       // this.vibration.vibrate([500, 500, 500]);
       // this.toastr.error("Datos ingresados incorrectos", 'Registro de Usuario');
+      this.spinner = false;
       this.presentToast('Datos incorrectos', 2000, 'danger', 'registro incorrecto');
     }
 

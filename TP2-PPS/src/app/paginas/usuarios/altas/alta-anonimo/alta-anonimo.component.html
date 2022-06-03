@@ -1,3 +1,12 @@
+
+  <div *ngIf="this.spinner">
+    <div class="loadingContainer" id="loadingContainer">
+      <!-- <app-spinner></app-spinner> -->
+      <div class="loading">
+        <img src="../../../assets/Icono.png">
+      </div>
+    </div>
+  </div>
 <ion-header>
   <ion-toolbar>
     <ion-back-button (click)="navigateBack()" slot="start"></ion-back-button>

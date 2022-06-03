@@ -72,6 +72,8 @@ export class AltaDuenioSupervisorComponent implements OnInit {
     ]
   }
 
+  private spinner = false;
+
   constructor(
     private router: Router,
     // private vibration: Vibration,
@@ -168,6 +170,7 @@ export class AltaDuenioSupervisorComponent implements OnInit {
   }
 
   onRegister() {
+    this.spinner = true;
     const auth = this.authService.register(this.email, this.password);
     if (auth) {
       const user = this.getDataUser();
@@ -179,11 +182,14 @@ export class AltaDuenioSupervisorComponent implements OnInit {
           // this.vibration.vibrate([500]);
           // this.toastr.success('Datos guardados con éxito!', 'Registro de Usuario');
           this.presentToast('Datos guardados con exito', 2000, 'success', 'Alta exitosa');
+          this.spinner = false;
+          this.router.navigateByUrl('usuarios/login');
           this.resetForm();
         });
     }
     else {
       // this.vibration.vibrate([500, 500, 500]);
+      this.spinner = false;
       this.presentToast('Datos incorrectos', 2000, 'danger', 'Alta denegada');
       // this.toastr.error("Datos ingresados incorrectos", 'Registro de Usuario');
     }

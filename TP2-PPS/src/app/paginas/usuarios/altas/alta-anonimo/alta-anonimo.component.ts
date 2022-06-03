@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 //import { Vibration } from '@ionic-native/vibration/ngx';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 //import { ToastrService } from 'ngx-toastr';
 import { Anonimo } from 'src/app/clases/anonimo';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,7 +17,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class AltaAnonimoComponent implements OnInit {
 
   form: FormGroup;
-
+  private spinner = false;
 
   validationUserMessage = {
     name: [
@@ -37,15 +37,15 @@ export class AltaAnonimoComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
    // private vibration: Vibration,
-    //private toastr: ToastrService,
+    private toastr: ToastController,
     private fs: FirestoreService,
     private userService: UsuariosService,
     private fotoService: FotoService,
-    public navCtrl: NavController 
+    public navCtrl: NavController
   ) { }
 
-  
- 
+
+
   navigateBack(){
     this.navCtrl.back();
   }
@@ -76,6 +76,7 @@ export class AltaAnonimoComponent implements OnInit {
   }
 
   onRegister() {
+    this.spinner = true;
     this.email = this.name + '@anonymous.com';
     const user = this.authService.register(this.email, this.password);
     if (user) {
@@ -91,14 +92,19 @@ export class AltaAnonimoComponent implements OnInit {
           await this.onLoginAnonymous(this.email, this.password);
           // this.vibration.vibrate([500]);
           // this.toastr.success('Datos guardados con éxito!', 'Registro de Usuario');
+          this.presentToast('Datos guardados con exito', 2000, 'success', 'Alta exitosa');
+          this.spinner = false;
+          this.router.navigateByUrl('usuarios/login');
           this.resetForm();
-          
+
           // this.redirectTo('/home');
         });
     }
     else {
       //this.vibration.vibrate([500, 500, 500]);
-     // this.toastr.error("Datos ingresados incorrectos", 'Registro de Usuario');
+      this.presentToast('Datos incorrectos', 2000, 'danger', 'registro incorrecto');
+      // this.toastr.error("Datos ingresados incorrectos", 'Registro de Usuario');
+     this.spinner = false;
     }
   }
 
@@ -141,4 +147,26 @@ export class AltaAnonimoComponent implements OnInit {
   }
 
   resetForm() { this.ngOnInit(); }
+
+  async presentToast(mensaje: string, duracion: number, color: string, titulo: string, boton?: boolean,
+    tituloBotonUno?: string, tituloBotonDos?: string, urlUno?: string, urlDos?: string) {
+    let toast;
+    if (boton) {
+      toast = await this.toastr.create({
+        message: mensaje,
+        duration: duracion,
+        color: color,
+        header: titulo,
+      });
+    }
+    else {
+      toast = await this.toastr.create({
+        message: mensaje,
+        duration: duracion,
+        color: color,
+        header: titulo
+      });
+    }
+    toast.present();
+  }
 }
