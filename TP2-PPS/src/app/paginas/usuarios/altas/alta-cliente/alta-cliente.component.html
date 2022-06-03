@@ -130,7 +130,7 @@
       <ion-img *ngIf="this.img; else no_img" [src]="this.img.webPath"></ion-img>
 
       <ng-template #no_img>
-        <ion-img src="assets/images/default.jpg"></ion-img>
+        <ion-img src="assets/images/default.jpg" height="50px"></ion-img>
       </ng-template>
 
     </ion-card-content>
@@ -140,7 +140,7 @@
     <ion-card-content>
 
       <form [formGroup]="grupoDeControles" (ngSubmit)="enviar()">
-        <ion-fab (click)="scannQR()" vertical="top" horizontal="end" slot="fixed">
+        <ion-fab (click)="escanearDni()" vertical="top" horizontal="end" slot="fixed">
           <ion-fab-button>
             <ion-icon name="barcode"></ion-icon>
           </ion-fab-button>
