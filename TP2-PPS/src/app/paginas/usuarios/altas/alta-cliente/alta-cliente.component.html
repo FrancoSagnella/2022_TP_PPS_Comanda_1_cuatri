@@ -2,14 +2,14 @@
 
     <!-- Bootstrap core CSS -->
     <!-- Custom styles for this template -->
-    <br>
+    <!-- <br>
 
     <body class="bg-light">
 
       <div class="container">
 
 
-        <div class="row">
+        <div class="row"> -->
       <!--   <div class="col-md-4 order-md-2 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
               <span class="text-muted">PAISES</span>
@@ -24,7 +24,7 @@
 
 
                     <!-- alta pedido -->
-
+<!--
           <div class="col-md-8 order-md-1">
             <h4 class="mb-3">Alta Cliente</h4>
             <form [formGroup]='grupoDeControles' (ngSubmit)="enviar()">
@@ -70,11 +70,11 @@
                 <label for="direccion" class="form-label">foto</label>
                 <input type="hidden" class="form-control" id="foto" placeholder="Ingrese la foto" formControlName="foto"  >
                 <small class="invalid" *ngIf="grupoDeControles.controls['foto'].errors?.['required'] && grupoDeControles.controls['foto'].touched">El foto es requerido</small>
-                </div>
+                </div> -->
                 <!-- <img   [src]="grupoDeControles.value.foto" width="100" height="100px" class="icon">
                 <img *ngIf='grupoDeControles.value.foto !== null' [src]="grupoDeControles.value.foto" width="100" height="100px" class="icon"> -->
 
-                <ion-img *ngIf="this.img; else no_img" [src]="this.img.webPath"></ion-img>
+                <!-- <ion-img *ngIf="this.img; else no_img" [src]="this.img.webPath"></ion-img>
                 <ng-template #no_img>
                   <ion-img src="assets/images/default.jpg"></ion-img>
                 </ng-template>
@@ -102,8 +102,121 @@
             <li class="list-inline-item"><a href="#">Support</a></li>
           </ul>
         </footer>
-      </div>
+      </div> -->
 
       <!-- Bootstrap core JavaScript
       ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
+
+
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button (click)="navigateBack()" slot="start"></ion-back-button>
+    <ion-title size="small">Registrar Cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab  vertical="top" horizontal="end">
+    <ion-fab-button (click)="takePic()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-card id="card-img">
+    <ion-card-content>
+      <ion-img *ngIf="this.img; else no_img" [src]="this.img.webPath"></ion-img>
+
+      <ng-template #no_img>
+        <ion-img src="assets/images/default.jpg"></ion-img>
+      </ng-template>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+
+      <form [formGroup]="grupoDeControles" (ngSubmit)="enviar()">
+        <ion-fab (click)="scannQR()" vertical="top" horizontal="end" slot="fixed">
+          <ion-fab-button>
+            <ion-icon name="barcode"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+
+        <ion-item>
+          <ion-input type="inputText" name="nombre" formControlName="nombre" placeholder="Nombre..">
+          </ion-input>
+        </ion-item>
+
+        <ng-container *ngFor="let validation of validationUserMessage.nombre">
+          <div class="error_message"
+            *ngIf="grupoDeControles.get('nombre').hasError(validation.type) && (grupoDeControles.get('nombre').dirty || grupoDeControles.get('nombre').touched)">
+            {{validation.message}}
+          </div>
+        </ng-container>
+
+        <ion-item>
+          <ion-input type="inputText" name="apellido" formControlName="apellido"  placeholder="Apellido..">
+          </ion-input>
+        </ion-item>
+
+        <ng-container *ngFor="let validation of validationUserMessage.apellido">
+          <div class="error_message"
+            *ngIf="grupoDeControles.get('apellido').hasError(validation.type) && (grupoDeControles.get('apellido').dirty || grupoDeControles.get('apellido').touched)">
+            {{validation.message}}
+          </div>
+        </ng-container>
+
+        <ion-item>
+          <ion-input type="number" name="dni" formControlName="dni" placeholder="DNI..">
+          </ion-input>
+        </ion-item>
+
+        <ng-container *ngFor="let validation of validationUserMessage.dni">
+          <div class="error_message"
+            *ngIf="grupoDeControles.get('dni').hasError(validation.type) && (grupoDeControles.get('dni').dirty || grupoDeControles.get('dni').touched)">
+            {{validation.message}}
+          </div>
+        </ng-container>
+
+        <ion-item>
+          <ion-input type="text" name="correo" formControlName="correo" placeholder="Correo..">
+          </ion-input>
+        </ion-item>
+
+        <ng-container *ngFor="let validation of validationUserMessage.correo">
+          <div class="error_message"
+            *ngIf="grupoDeControles.get('correo').hasError(validation.type) && (grupoDeControles.get('correo').dirty || grupoDeControles.get('correo').touched)">
+            {{validation.message}}
+          </div>
+        </ng-container>
+
+        <ion-item>
+          <ion-input type="password" name="clave" formControlName="clave" placeholder="Clave...">
+          </ion-input>
+        </ion-item>
+
+        <ng-container *ngFor="let validation of validationUserMessage.clave">
+          <div class="error_message"
+            *ngIf="grupoDeControles.get('clave').hasError(validation.type) && (grupoDeControles.get('clave').dirty || grupoDeControles.get('clave').touched)">
+            {{validation.message}}
+          </div>
+        </ng-container>
+
+        <ion-button shape="round" type="submit" fill="solid" class="sign-btn" [disabled]="!grupoDeControles.valid">
+          Registrar</ion-button>
+
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab (click)="redirectTo('home')" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

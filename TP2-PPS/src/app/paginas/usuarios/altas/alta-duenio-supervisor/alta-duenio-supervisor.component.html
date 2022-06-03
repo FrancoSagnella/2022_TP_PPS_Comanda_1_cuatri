@@ -37,7 +37,6 @@
 
         <ion-item>
           <ion-input type="inputText" name="name" formControlName="name" [(ngModel)]="inputSetQr.name" placeholder="Nombre..">
-            <ion-icon name="logo-reddit"></ion-icon>
           </ion-input>
         </ion-item>
 
@@ -50,7 +49,6 @@
 
         <ion-item>
           <ion-input type="inputText" name="surname" formControlName="surname" [(ngModel)]="inputSetQr.surname" placeholder="Apellido..">
-            <ion-icon name="logo-reddit"></ion-icon>
           </ion-input>
         </ion-item>
 
@@ -63,7 +61,6 @@
 
         <ion-item>
           <ion-input type="number" name="dni" formControlName="dni" [(ngModel)]="inputSetQr.dni" placeholder="DNI..">
-            <ion-icon name="logo-reddit"></ion-icon>
           </ion-input>
         </ion-item>
 
@@ -76,7 +73,6 @@
 
         <ion-item>
           <ion-input type="number" name="cuil" formControlName="cuil" placeholder="CUIL..">
-            <ion-icon name="logo-reddit"></ion-icon>
           </ion-input>
         </ion-item>
 
@@ -89,7 +85,6 @@
 
         <ion-item>
           <ion-label>
-            <ion-icon name="logo-reddit"></ion-icon>
           </ion-label>
 
           <ion-select placeholder="Perfil.." name="profile" formControlName="profile" okText="Confirmar"
@@ -107,7 +102,6 @@
 
         <ion-item>
           <ion-input type="text" name="email" formControlName="email" placeholder="Correo..">
-            <ion-icon name="mail-outline"></ion-icon>
           </ion-input>
         </ion-item>
 
@@ -119,8 +113,7 @@
         </ng-container>
 
         <ion-item>
-          <ion-input type="password" name="password" formControlName="password" placeholder="**************">
-            <ion-icon name="lock-closed-outline"></ion-icon>
+          <ion-input type="password" name="password" formControlName="password" placeholder="Clave...">
           </ion-input>
         </ion-item>
 
@@ -140,7 +133,7 @@
 
   <ion-fab (click)="redirectTo('home')" vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button>
-      <ion-icon name="home"></ion-icon>
+      <ion-icon name="arrow-back"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 

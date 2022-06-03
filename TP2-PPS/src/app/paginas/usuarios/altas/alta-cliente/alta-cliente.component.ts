@@ -20,6 +20,39 @@ export class AltaClienteComponent implements OnInit {
   public grupoDeControles!:FormGroup
 	fotoCargada: any;
  foto:any;
+
+ validationUserMessage = {
+  nombre: [
+    { type: "required", message: "Por favor, ingrese nombre" },
+    { type: "minlength", message: "El nombre debe tener 2 caractéres o más" },
+    { type: "maxlength", message: "El nombre no puede tener más de 30 caractéres" },
+    { type: "pattern", message: "El nombre ingresado es incorrecto, inténtelo de nuevo!" },
+  ],
+  apellido: [
+    { type: "required", message: "Por favor, ingrese apellido" },
+    { type: "minlength", message: "El apellido debe tener 2 caractéres o más" },
+    { type: "maxlength", message: "El apellido no puede tener más de 30 caractéres" },
+    { type: "pattern", message: "El apellido ingresado es incorrecto, inténtelo de nuevo!" },
+  ],
+  dni: [
+    { type: "required", message: "Por favor, ingrese DNI" },
+    { type: "max", message: "El DNI debe tener 8 dígitos" },
+    { type: "min", message: "El DNI debe tener 8 dígitos" }
+  ],
+  img: [
+    { type: "required", message: "Por favor, ingrese foto de perfil" },
+  ],
+  correo: [
+    { type: "required", message: "Por favor, ingrese correo" },
+    { type: "maxlength", message: "El correo no puede tener más de 30 caractéres" },
+    { type: "pattern", message: "El correo ingresado es incorrecto, inténtelo de nuevo!" }
+  ],
+  clave: [
+    { type: "required", message: "Por favor, ingrese contraseña" },
+    { type: "minlength", message: "La contraseña debe tener 6 caractéres o más" },
+    { type: "maxlength", message: "La contraseña no puede tener más de 15 caractéres" },
+  ]
+}
   constructor(private fb:FormBuilder, private afs: AngularFirestore,private firestore:FirestoreService,private route:Router,
     private camera:Camera,private qr : BarcodeScanner,private storage: AngularFireStorage,public auth:AuthService,
     private fotoService:FotoService, private usuariosService:UsuariosService
@@ -37,12 +70,12 @@ export class AltaClienteComponent implements OnInit {
     this.grupoDeControles=this.fb.group({
       //'descripcion':['',[Validators.required,this.validadorDeEspacios]],
       //'codigo':['',[Validators.required,Validators.min(100),Validators.max(10000)]],
-      'nombre':['',[Validators.required]],
-      'apellido':['',[Validators.required]],
-      'correo':['',[Validators.required]],
-      'dni':['',[Validators.required]],
-      'clave':['',[Validators.required]],
-      'foto':['',[Validators.required]],
+      'nombre':['',Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ñ]+$'), Validators.maxLength(30), Validators.minLength(2)])],
+      'apellido':['',Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ñ]+$'), Validators.maxLength(30), Validators.minLength(2)])],
+      'correo':['',Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.maxLength(35)])],
+      'dni':['',Validators.compose([Validators.required, Validators.min(11111111), Validators.max(99999999)])],
+      'clave':['',Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
+      'foto':['',Validators.compose([Validators.required])],
      // 'comestible':['',[Validators.required]],
       //'localidad':['',Validators.required],
       //'pais':['',Validators.required],
@@ -50,6 +83,7 @@ export class AltaClienteComponent implements OnInit {
     });
 
   }
+
 
   get img() { return this.grupoDeControles.get('foto').value; }
   set img(data: any) { this.grupoDeControles.controls['foto'].setValue(data); }
@@ -89,6 +123,10 @@ export class AltaClienteComponent implements OnInit {
 
     })
 
+  }
+
+  navigateBack(){
+    // this.navCtrl.back();
   }
 
   resetForm() { this.ngOnInit(); }
