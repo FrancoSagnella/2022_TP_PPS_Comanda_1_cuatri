@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AltaAnonimoComponent } from './altas/alta-anonimo/alta-anonimo.component';
 import { AltaEmpleadoComponent } from './altas/alta-empleado/alta-empleado.component';
+import { Vibration } from '@ionic-native/vibration/ngx';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { AltaEmpleadoComponent } from './altas/alta-empleado/alta-empleado.compo
     ReactiveFormsModule,
     AngularFirestoreModule,
     IonicModule,
-  ]
+  ],
+  providers:[Vibration]
 })
 export class UsuariosModule { }

@@ -19,6 +19,7 @@ import { HomeComponent } from './paginas/home/home.component';
 import { SpinnerComponent } from './paginas/spinner/spinner.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MesaModule } from './paginas/mesa/mesa.module';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
             ReactiveFormsModule,
             AngularFirestoreModule,
             UsuariosModule,
+            MesaModule,
             BrowserAnimationsModule,
             ToastrModule.forRoot({
               positionClass: 'toast-top-center',

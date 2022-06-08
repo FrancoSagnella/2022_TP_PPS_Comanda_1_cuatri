@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FotoService } from 'src/app/services/foto.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Vibration } from '@ionic-native/vibration/ngx';
 @Component({
   selector: 'app-alta-anonimo',
   templateUrl: './alta-anonimo.component.html',
@@ -36,7 +37,7 @@ export class AltaAnonimoComponent implements OnInit {
     private formbuider: FormBuilder,
     private authService: AuthService,
     private router: Router,
-   // private vibration: Vibration,
+   private vibration: Vibration,
     private toastr: ToastController,
     private fs: FirestoreService,
     private userService: UsuariosService,
@@ -92,16 +93,16 @@ export class AltaAnonimoComponent implements OnInit {
           await this.onLoginAnonymous(this.email, this.password);
           // this.vibration.vibrate([500]);
           // this.toastr.success('Datos guardados con éxito!', 'Registro de Usuario');
-          this.presentToast('Datos guardados con exito', 2000, 'success', 'Alta exitosa');
-          this.spinner = false;
-          this.router.navigateByUrl('usuarios/login');
+          // this.presentToast('Datos guardados con exito', 2000, 'success', 'Alta exitosa');
+          // this.spinner = false;
+          // this.router.navigateByUrl('usuarios/login');
           this.resetForm();
 
           // this.redirectTo('/home');
         });
     }
     else {
-      //this.vibration.vibrate([500, 500, 500]);
+      this.vibration.vibrate([500]);
       this.presentToast('Datos incorrectos', 2000, 'danger', 'registro incorrecto');
       // this.toastr.error("Datos ingresados incorrectos", 'Registro de Usuario');
      this.spinner = false;
@@ -129,13 +130,14 @@ export class AltaAnonimoComponent implements OnInit {
   async onLoginAnonymous(email: string, pass: string) {
     try {
       await this.authService.login(email, pass);
-    //  this.vibration.vibrate([500]);
-      //this.toastr.success('Ingreso con Exito', 'Iniciar Sesión');
+      this.vibration.vibrate([500]);
+      this.presentToast('Iniciaste sesión', 2000, 'success', 'Ingreso exitoso');
       this.redirectTo('/home');
     }
     catch (error) {
-    //  this.vibration.vibrate([500, 500, 500]);
+     this.vibration.vibrate([500]);
     //  this.toastr.error('Error en registro anonymous', 'Iniciar Sesión');
+    this.presentToast('Error al registrar', 2000, 'danger', 'Ingreso fallido');
 
       // if (error == 911) { this.toastr.error('Aún no fue aceptado por Administración, sea paciente', 'Iniciar Sesión'); }
       // else { this.toastr.error('Email/Contraseña Incorrecto', 'Iniciar Sesión'); }
