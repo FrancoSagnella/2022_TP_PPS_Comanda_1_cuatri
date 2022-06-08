@@ -29,3 +29,15 @@ SEMANA 2 28/05 - 5/06<br>
      - Alta de clientes - listo<br>
      - Estilos - listo<br>
      - Alta de productos - pendiente<br>
+
+
+SEMANA 3 5/06 - 11/06<br>
+  TAREAS DE ALFA: <br>
+     - QR Ingreso Local - Pendiente<br>
+     - Gestion Ingresar al local - Pendiente<br>
+   TAREAS DE BETA:<br>
+     - QR de la mesa - Pendiente<br>
+     - GEstion Realizar Pedidos - Pendiente<br>
+   TAREAS DE GAMMA<br>
+     - QR de propina - pendiente<br>
+     - Gestion Confirmar Pedidos - pendiente<br>
