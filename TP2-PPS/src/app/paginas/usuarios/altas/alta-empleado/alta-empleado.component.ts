@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+import { Vibration } from '@ionic-native/vibration/ngx';
 import { NavComponentWithProps, NavController, ToastController } from '@ionic/angular';
 import { Empleado } from 'src/app/clases/empleado';
 import { AuthService } from 'src/app/services/auth.service';
@@ -78,7 +79,7 @@ export class AltaEmpleadoComponent implements OnInit {
     private formbuider: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    // private vibration: Vibration,
+    private vibration: Vibration,
     public toastr: ToastService,
     private userService: UsuariosService,
     private fs: FirestoreService,
@@ -197,7 +198,7 @@ export class AltaEmpleadoComponent implements OnInit {
         });
     }
     else {
-      // this.vibration.vibrate([500, 500, 500]);
+      this.vibration.vibrate([500]);
       this.spinner = false;
       this.toastr.presentToast('Datos incorrectos', 2000, 'danger', 'Alta denegada');
     }

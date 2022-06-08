@@ -10,6 +10,10 @@ const routes: Routes = [
     path: 'usuarios',
     loadChildren: () => import('./paginas/usuarios/usuarios.module').then(m => m.UsuariosModule),
   },
+  {
+    path: 'mesa',
+    loadChildren: () => import('./paginas/mesa/mesa.module').then(m => m.MesaModule),
+  },
   {path:'**', redirectTo:'home', pathMatch:'full'},
 ];
 @NgModule({

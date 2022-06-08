@@ -11,6 +11,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
 import { ToastController } from '@ionic/angular';
 import { ToastService } from 'src/app/services/toast.service';
+import { Vibration } from '@ionic-native/vibration/ngx';
 
 @Component({
   selector: 'app-alta-duenio-supervisor',
@@ -77,18 +78,15 @@ export class AltaDuenioSupervisorComponent implements OnInit {
 
   constructor(
     private router: Router,
-    // private vibration: Vibration,
-    // public toastr: ToastrService,
+    private vibration: Vibration,
     private toastr:ToastService,
     private formbuider: FormBuilder,
     private authService: AuthService,
     private usuariosService: UsuariosService,
-    // private fs: FirestorageService,
     private firestore: FirestoreService,
     private fotoService: FotoService,
     // private qrService: QrService,
     private qrDni: BarcodeScanner,
-    // public navCtrl: NavController
   ) { }
 
 
@@ -189,7 +187,7 @@ export class AltaDuenioSupervisorComponent implements OnInit {
         });
     }
     else {
-      // this.vibration.vibrate([500, 500, 500]);
+      this.vibration.vibrate([500]);
       this.spinner = false;
       this.toastr.presentToast('Datos incorrectos', 2000, 'danger', 'Alta denegada');
       // this.toastr.error("Datos ingresados incorrectos", 'Registro de Usuario');

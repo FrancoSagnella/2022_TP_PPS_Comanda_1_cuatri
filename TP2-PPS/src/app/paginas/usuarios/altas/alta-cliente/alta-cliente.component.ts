@@ -13,6 +13,7 @@ import { FotoService } from 'src/app/services/foto.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
 import { ToastController } from '@ionic/angular';
+import { Vibration } from '@ionic-native/vibration/ngx';
 @Component({
   selector: 'app-alta-cliente',
   templateUrl: './alta-cliente.component.html',
@@ -58,7 +59,7 @@ export class AltaClienteComponent implements OnInit {
 }
   constructor(private fb:FormBuilder, private afs: AngularFirestore,private firestore:FirestoreService,private route:Router,
     private camera:Camera,private qr : BarcodeScanner,private storage: AngularFireStorage,public auth:AuthService,
-    private fotoService:FotoService, private usuariosService:UsuariosService,private toastr:ToastController
+    private fotoService:FotoService, private usuariosService:UsuariosService,private toastr:ToastController,private vibration:Vibration
     ) { }
   cliente:Cliente={id:'',correo:'',nombre:'',apellido:'',img:'',estado:'PENDIENTE',dni:0,fechaCreacion:0,perfil:'CLIENTE'};
 
@@ -124,7 +125,7 @@ export class AltaClienteComponent implements OnInit {
         });
     }
     else {
-      // this.vibration.vibrate([500, 500, 500]);
+      this.vibration.vibrate([500]);
       // this.toastr.error("Datos ingresados incorrectos", 'Registro de Usuario');
       this.spinner = false;
       this.presentToast('Datos incorrectos', 2000, 'danger', 'registro incorrecto');

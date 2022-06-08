@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Vibration } from '@ionic-native/vibration/ngx';
 import { ToastController } from '@ionic/angular';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
@@ -39,7 +40,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    // private vibration: Vibration,
+    private vibration: Vibration,
     private toastr: ToastController
     ,
     private formbuider: FormBuilder,
@@ -95,12 +96,15 @@ export class LoginComponent implements OnInit {
           this.redirectTo('/home');
         }
         else {
-          // this.vibration.vibrate([500, 500, 500]);
+          this.vibration.vibrate([500]);
           // this.toastr.error('Aún no fue habilitado por administración, sea paciente', 'Iniciar Sesión');
           this.presentToast('Su usuario todavía no fue autorizado', 2000, 'danger', 'No se inició sesión');
         }
       }
-      else { this.presentToast('Contraseña incorrecta', 2000, 'danger', 'No se inicio sesión') }
+      else {
+        this.vibration.vibrate([500]);
+        this.presentToast('Contraseña incorrecta', 2000, 'danger', 'No se inicio sesión');
+      }
       sub.unsubscribe();
     });
 
