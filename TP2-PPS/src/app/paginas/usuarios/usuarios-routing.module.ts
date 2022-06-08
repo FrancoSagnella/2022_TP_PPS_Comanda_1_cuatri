@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AltaAnonimoComponent } from './altas/alta-anonimo/alta-anonimo.component';
 import { AltaClienteComponent } from './altas/alta-cliente/alta-cliente.component';
 import { AltaDuenioSupervisorComponent } from './altas/alta-duenio-supervisor/alta-duenio-supervisor.component';
+import { AltaEmpleadoComponent } from './altas/alta-empleado/alta-empleado.component';
 import { ListadoComponent } from './listado/listado.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path:'listado', component:ListadoComponent},
   {path:'login', component:LoginComponent},
   {path:'logout', component:LogoutComponent},
-  {path:'altaAnonimo', component:AltaAnonimoComponent}
+  {path:'altaAnonimo', component:AltaAnonimoComponent},
+  {path:'altaEmpleado', component:AltaEmpleadoComponent},
 ];
 
 @NgModule({

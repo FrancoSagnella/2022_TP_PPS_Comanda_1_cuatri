@@ -11,10 +11,11 @@ import { ListadoComponent } from './listado/listado.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AltaAnonimoComponent } from './altas/alta-anonimo/alta-anonimo.component';
+import { AltaEmpleadoComponent } from './altas/alta-empleado/alta-empleado.component';
 
 
 @NgModule({
-  declarations: [AltaDuenioSupervisorComponent, AltaClienteComponent, ListadoComponent, LoginComponent, LogoutComponent,AltaAnonimoComponent],
+  declarations: [AltaDuenioSupervisorComponent, AltaClienteComponent, ListadoComponent, LoginComponent, LogoutComponent,AltaAnonimoComponent,AltaEmpleadoComponent],
   imports: [
     CommonModule,
     UsuariosRoutingModule,
