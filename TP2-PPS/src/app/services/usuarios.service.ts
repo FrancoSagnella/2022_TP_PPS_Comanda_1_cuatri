@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Anonimo } from '../clases/anonimo';
 import { Cliente } from '../clases/cliente';
 import { Duenio } from '../clases/duenio';
+import { Empleado } from '../clases/empleado';
 import { Supervisor } from '../clases/supervisor';
 
 @Injectable({
@@ -16,11 +17,11 @@ export class UsuariosService {
   referencia: AngularFirestoreCollection;
 
   constructor(private bd: AngularFirestore) {
-    this.referencia = this.bd.collection<Duenio | Supervisor | Cliente>
+    this.referencia = this.bd.collection<Duenio | Supervisor | Cliente | Empleado | Anonimo>
       (this.coleccion, ref => ref.orderBy('fechaCreacion', 'asc'));
   }
 
-  public async alta(model: Duenio | Supervisor | Cliente | Anonimo ) {
+  public async alta(model: Duenio | Supervisor | Cliente | Empleado | Anonimo ) {
     try {
       model.id = this.bd.createId();
       const result = this.referencia.doc(model.id).set({ ...model });
@@ -47,13 +48,13 @@ export class UsuariosService {
     return this.getByPerfil('CLIENTE') as Observable<Cliente[]>;
   }
 
-  // getEmpleados() {
-  //   return this.getByPerfil('EMPLEADO') as Observable<Empleado[]>;
-  // }
+  getEmpleados() {
+    return this.getByPerfil('EMPLEADO') as Observable<Empleado[]>;
+  }
 
-  // getAnonimos() {
-  //   return this.getByPerfil('ANONIMO') as Observable<Anonimo[]>;
-  // }
+  getAnonimos() {
+    return this.getByPerfil('ANONIMO') as Observable<Anonimo[]>;
+  }
 
   private getByPerfil(perfil: string) {
     try {

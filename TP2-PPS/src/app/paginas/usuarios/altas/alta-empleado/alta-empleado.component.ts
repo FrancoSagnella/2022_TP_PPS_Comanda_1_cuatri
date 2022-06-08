@@ -1,25 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
-import { Duenio } from 'src/app/clases/duenio';
-import { Supervisor } from 'src/app/clases/supervisor';
+import { NavComponentWithProps, NavController, ToastController } from '@ionic/angular';
+import { Empleado } from 'src/app/clases/empleado';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { FotoService } from 'src/app/services/foto.service';
-import { UsuariosService } from 'src/app/services/usuarios.service';
-import { ToastrService } from 'ngx-toastr';
-import { ToastController } from '@ionic/angular';
 import { ToastService } from 'src/app/services/toast.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
-  selector: 'app-alta-duenio-supervisor',
-  templateUrl: './alta-duenio-supervisor.component.html',
-  styleUrls: ['./alta-duenio-supervisor.component.scss'],
+  selector: 'app-alta-empleado',
+  templateUrl: './alta-empleado.component.html',
+  styleUrls: ['./alta-empleado.component.scss'],
 })
-export class AltaDuenioSupervisorComponent implements OnInit {
-  form: FormGroup;
+export class AltaEmpleadoComponent implements OnInit {
 
+  form: FormGroup;
+  spinner = false;
   private options = {
     prompt: "Escaneá el DNI",
     formats: 'PDF_417, QR_CODE',
@@ -28,8 +27,10 @@ export class AltaDuenioSupervisorComponent implements OnInit {
   };
 
   listEmployees = [
-    { kynd: 'DUENIO' },
-    { kynd: 'SUPERVISOR' },
+    { kynd: 'METRE' },
+    { kynd: 'MOZO' },
+    { kynd: 'COCINERO' },
+    { kynd: 'BARTENDER' },
   ]
 
   validationUserMessage = {
@@ -73,41 +74,38 @@ export class AltaDuenioSupervisorComponent implements OnInit {
     ]
   }
 
-  private spinner = false;
-
   constructor(
-    private router: Router,
-    // private vibration: Vibration,
-    // public toastr: ToastrService,
-    private toastr:ToastService,
     private formbuider: FormBuilder,
     private authService: AuthService,
-    private usuariosService: UsuariosService,
-    // private fs: FirestorageService,
-    private firestore: FirestoreService,
-    private fotoService: FotoService,
+    private router: Router,
+    // private vibration: Vibration,
+    public toastr: ToastService,
+    private userService: UsuariosService,
+    private fs: FirestoreService,
+    private cameraService: FotoService,
     // private qrService: QrService,
+
     private qrDni: BarcodeScanner,
-    // public navCtrl: NavController
+    public navCtrl: NavController
   ) { }
 
 
-
   navigateBack(){
-    // this.navCtrl.back();
+    this.navCtrl.back();
   }
+
   ngOnInit() { this.validateForm(); }
 
   validateForm() {
     this.form = this.formbuider.group({
-      'name': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ñ]+$'), Validators.maxLength(30), Validators.minLength(2)])],
-      'surname': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ñ]+$'), Validators.maxLength(30), Validators.minLength(2)])],
-      'dni': ['', Validators.compose([Validators.required, Validators.min(11111111), Validators.max(99999999)])],
-      'cuil': ['', Validators.compose([Validators.required, Validators.min(11111111111), Validators.max(99999999999)])],
-      'img': ['', Validators.compose([Validators.required])],
-      'profile': ['', Validators.compose([Validators.required])],
-      'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.maxLength(35)])],
-      'password': ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
+      'name':['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ñ]+$'), Validators.maxLength(30), Validators.minLength(2)])],
+      'surname':['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ñ]+$'), Validators.maxLength(30), Validators.minLength(2)])],
+      'dni':['', Validators.compose([Validators.required, Validators.min(11111111), Validators.max(99999999)])],
+      'cuil':['', Validators.compose([Validators.required, Validators.min(11111111111), Validators.max(99999999999)])],
+      'img':['', Validators.compose([Validators.required])],
+      'profile':['', Validators.compose([Validators.required])],
+      'email':['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.maxLength(35)])],
+      'password':['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
     })
   }
 
@@ -165,8 +163,19 @@ export class AltaDuenioSupervisorComponent implements OnInit {
     dni: '',
   };
 
+  // async scannQR() {
+  //   let data: any = await this.qrService.scannDNI();
+
+  //   if (data) {
+  //     this.surname = data.name;
+  //     this.name = data.surname;
+  //     this.dni = data.dni;
+  //   }
+  //   else { this.toastr.error("Error al escanear el DNI", "QR"); }
+  // }
+
   async takePic() {
-    const image = await this.fotoService.addNewToGallery();
+    const image = await this.cameraService.addNewToGallery();
     if (image) { this.img = image; }
   }
 
@@ -175,13 +184,12 @@ export class AltaDuenioSupervisorComponent implements OnInit {
     const auth = this.authService.register(this.email, this.password);
     if (auth) {
       const user = this.getDataUser();
-      this.firestore.saveImage(this.img, 'users', new Date().getTime() + '')
+      this.fs.saveImage(this.img, 'users', new Date().getTime() + '')
         .then(async url => {
           user.img = url;
 
-          await this.usuariosService.alta(user);
+          await this.userService.alta(user);
           // this.vibration.vibrate([500]);
-          // this.toastr.success('Datos guardados con éxito!', 'Registro de Usuario');
           this.toastr.presentToast('Datos guardados con exito', 2000, 'success', 'Alta exitosa');
           this.spinner = false;
           this.router.navigateByUrl('usuarios/home');
@@ -192,14 +200,13 @@ export class AltaDuenioSupervisorComponent implements OnInit {
       // this.vibration.vibrate([500, 500, 500]);
       this.spinner = false;
       this.toastr.presentToast('Datos incorrectos', 2000, 'danger', 'Alta denegada');
-      // this.toastr.error("Datos ingresados incorrectos", 'Registro de Usuario');
     }
   }
 
   getDataUser() {
-    let user: Duenio | Supervisor = null;
+    let user: Empleado = null;
 
-    if (this.profile == 'DUENIO') {
+    if (this.profile == 'METRE') {
       user = {
         id: '',
         nombre: this.name,
@@ -209,11 +216,12 @@ export class AltaDuenioSupervisorComponent implements OnInit {
         img: this.img,
         estado: 'ACEPTADO',
         correo: this.email,
-        perfil: 'DUENIO',
-        fechaCreacion: new Date().getTime(),
+        rol: 'METRE',
+        perfil: 'EMPLEADO',
+        fechaCreacion: new Date().getTime()
       };
     }
-    else {
+    else if (this.profile == 'MOZO') {
       user = {
         id: '',
         nombre: this.name,
@@ -223,7 +231,38 @@ export class AltaDuenioSupervisorComponent implements OnInit {
         img: this.img,
         estado: 'PENDIENTE',
         correo: this.email,
-        perfil: 'SUPERVISOR',
+        rol: 'MOZO',
+        perfil: 'EMPLEADO',
+        fechaCreacion: new Date().getTime()
+      };
+    }
+    else if (this.profile == 'COCINERO') {
+      user = {
+        id: '',
+        nombre: this.name,
+        apellido: this.surname,
+        dni: this.dni,
+        cuil: this.cuil,
+        img: this.img,
+        estado: 'PENDIENTE',
+        correo: this.email,
+        rol: 'COCINERO',
+        perfil: 'EMPLEADO',
+        fechaCreacion: new Date().getTime()
+      };
+    }
+    else if (this.profile == 'BARTENDER') {
+      user = {
+        id: '',
+        nombre: this.name,
+        apellido: this.surname,
+        dni: this.dni,
+        cuil: this.cuil,
+        img: this.img,
+        estado: 'PENDIENTE',
+        correo: this.email,
+        rol: 'BARTENDER',
+        perfil: 'EMPLEADO',
         fechaCreacion: new Date().getTime()
       };
     }
