@@ -15,3 +15,4 @@ export class Pedido {
 //  CONFIRMADO: cliente es quien asignará este estado
 //  COBRAR: cliente es quien asignará este estado
 //  COBRADO: mozo es quien asignará este estado
+

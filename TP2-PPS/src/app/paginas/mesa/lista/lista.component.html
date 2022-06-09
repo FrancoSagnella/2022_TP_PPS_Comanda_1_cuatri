@@ -1,3 +1,41 @@
-<p>
-  lista works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button (click)="navigateBack()" slot="start"></ion-back-button>
+
+    <ion-title size="small">Listado de Mesas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-content>
+  <div class="container-cards">
+    <div style="all:unset;" *ngFor="let table of this.tables$ | async">
+      <ion-card class="card-shadow">
+        <img src="{{ table.img }}" />
+
+        <div class="details">
+          <p>{{ table.numero }}</p>
+          <p>{{ table.tipo }}</p>
+          <p>{{ table.estado }}</p>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+
+  <ion-fab (click)="redirectTo('home')" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="home"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>{{ this.kyndSelected.val }}</ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngFor="let p of this.kynds" (click)="setFilter(p)">
+        <p>{{p.val}}</p>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>

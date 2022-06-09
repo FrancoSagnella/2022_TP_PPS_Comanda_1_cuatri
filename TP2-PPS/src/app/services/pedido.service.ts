@@ -3,11 +3,11 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Pedido } from '../clases/pedido';
+
 @Injectable({
   providedIn: 'root'
 })
 export class PedidoService {
-
   pathOfCollection = 'pedidos';
   referenceToCollection: AngularFirestoreCollection;
 
@@ -124,4 +124,6 @@ export class PedidoService {
   getLastByUser(correo: string, estado?: string) {
     return this.getByUser(correo, estado).pipe(
       map(pedidos => pedidos.slice(-1)[0]));
-  }}
+
+  }
+}
