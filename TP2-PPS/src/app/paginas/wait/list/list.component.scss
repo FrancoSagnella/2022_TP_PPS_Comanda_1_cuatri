@@ -11,10 +11,20 @@ ion-card {
 }
 
 .details {
-  text-align: end;
-  padding-right: 1%;
+  text-align: start;
+  padding-left: 2%;
+  width: 100%;
+}
+
+.buttons {
+  padding: 1%;
+  margin-right: 0%;
 }
 
 p {
   margin-top: 5%;
+}
+
+#p-title {
+  margin-top: 0%;
 }
