@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Pedido } from '../clases/pedido';
 
 @Injectable({
@@ -33,8 +33,7 @@ export class PedidoService {
   getInactivos() {
     try {
       return this.getAll().pipe(
-        map
-        (requests => requests.filter(
+        map(requests => requests.filter(
           u => u.estado == 'CANCELADO' || u.estado == 'FINALIZADO' ||
             u.estado == 'COBRADO' || u.estado == 'ENCUESTADO'
         )));
@@ -125,5 +124,6 @@ export class PedidoService {
   getLastByUser(correo: string, estado?: string) {
     return this.getByUser(correo, estado).pipe(
       map(pedidos => pedidos.slice(-1)[0]));
+
   }
 }

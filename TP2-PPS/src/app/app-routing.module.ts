@@ -3,6 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './paginas/home/home.component';
+import { AltaComponent } from './paginas/producto/alta/alta.component';
+
 import { ListComponent } from './paginas/wait/list/list.component';
 
 const routes: Routes = [
@@ -14,6 +16,10 @@ const routes: Routes = [
   {
     path: 'mesa',
     loadChildren: () => import('./paginas/mesa/mesa.module').then(m => m.MesaModule),
+  },
+  {
+    path: 'producto',
+    loadChildren: () => import('./paginas/producto/producto.module').then(m => m.ProductoModule),
   },
   {path:'wait/list', component:ListComponent},
   {path:'**', redirectTo:'home', pathMatch:'full'},

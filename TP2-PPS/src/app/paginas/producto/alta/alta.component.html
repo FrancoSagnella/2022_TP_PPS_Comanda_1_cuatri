@@ -1,0 +1,202 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button (click)="navigateBack()" slot="start"></ion-back-button>
+ 
+    <ion-title size="small">Alta Producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="crearProducto()">
+        <ion-item>
+          <ion-input type="text" name="nombreProducto" formControlName="nombreProducto"
+            placeholder="Nombre del Producto">
+            <ion-icon name="fast-food-outline"></ion-icon>
+          </ion-input>
+
+          <!-- Errors nombreProducto-->
+          <ion-row class="error_message">
+            <small
+              *ngIf="form.get('nombreProducto').hasError('required') && (form.get('nombreProducto').dirty || form.get('nombreProducto').touched)">Este
+              campo es obligatorio</small>
+          </ion-row>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="text" name="descripcionProducto" formControlName="descripcionProducto"
+            placeholder="Descripcion Producto">
+            <ion-icon name="document-text-outline"></ion-icon>
+          </ion-input>
+
+          <!-- Errors descripcionProducto-->
+          <ion-row class="error_message">
+            <small
+              *ngIf="form.get('descripcionProducto').hasError('required') && (form.get('descripcionProducto').dirty || form.get('descripcionProducto').touched)">Este
+              campo es obligatorio</small>
+          </ion-row>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="number" name="tiempo" formControlName="tiempo" placeholder="Tiempo de elaboracion promedio">
+            <ion-icon name="timer-outline"></ion-icon>
+          </ion-input>
+
+          <!-- Errors  tiempo -->
+          <ion-row class="error_message">
+            <small *ngIf="form.get('tiempo').hasError('required') && (form.get('tiempo').dirty || form.get('tiempo').touched)">Este campo es obligatorio</small>
+          </ion-row>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-input type="number" name="precio" formControlName="precio" placeholder="Precio">
+            <ion-icon name="cash-outline"></ion-icon>
+          </ion-input>
+
+          <!-- Errors  precio -->
+          <ion-row class="error_message">
+            <small
+              *ngIf="form.get('precio').hasError('required') && (form.get('precio').dirty || form.get('precio').touched)">Este
+              campo es obligatorio</small>
+          </ion-row>
+        </ion-item>
+
+
+
+        <!-- imagen -->
+        <!--ion-item class="image-item">
+  <form [formGroup]="form" (ngSubmit)="crearProducto()">
+    <div class="wrapform">
+
+      <ion-item>
+        <ion-input type="text" name="nombreProducto" formControlName="nombreProducto" placeholder="Nombre del Producto">
+          <ion-icon name="fast-food-outline"></ion-icon>
+        </ion-input>-->
+
+        <!-- Errors nombreProducto-->
+        <!-- <ion-item>
+        <ion-row class="hiddenItems">
+          <small
+            *ngIf="form.get('nombreProducto').hasError('required') && (form.get('nombreProducto').dirty || form.get('nombreProducto').touched)">Este
+            campo es obligatorio</small>
+        </ion-row>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="text" name="descripcionProducto" formControlName="descripcionProducto"
+          placeholder="Descripcion Producto">
+          <ion-icon name="document-text-outline"></ion-icon>
+        </ion-input> -->
+
+        <!-- Errors descripcionProducto-->
+        <!-- <ion-row class="hiddenItems">
+          <small
+            *ngIf="form.get('descripcionProducto').hasError('required') && (form.get('descripcionProducto').dirty || form.get('descripcionProducto').touched)">Este
+            campo es obligatorio</small>
+        </ion-row>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="number" name="tiempo" formControlName="tiempo" placeholder="Tiempo de elaboracion promedio">
+          <ion-icon name="timer-outline"></ion-icon>
+        </ion-input> -->
+
+        <!-- Errors  tiempo -->
+        <!-- <ion-row class="hiddenItems">
+          <small
+            *ngIf="form.get('tiempo').hasError('required') && (form.get('tiempo').dirty || form.get('tiempo').touched)">Este
+            campo es obligatorio</small>
+        </ion-row>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-input type="number" name="precio" formControlName="precio" placeholder="Precio">
+          <ion-icon name="cash-outline"></ion-icon>
+        </ion-input> -->
+
+        <!-- Errors  precio -->
+        <!-- <ion-row class="hiddenItems">
+          <small
+            *ngIf="form.get('precio').hasError('required') && (form.get('precio').dirty || form.get('precio').touched)">Este
+            campo es obligatorio</small>
+        </ion-row>
+      </ion-item> -->
+
+      <ion-item>
+        <ion-label>
+          <ion-icon name="logo-reddit"></ion-icon>
+        </ion-label>
+
+        <ion-select placeholder="Tipo.." name="tipo" formControlName="tipo" okText="Confirmar"
+          cancelText="Cancelar">
+          <ion-select-option>COMIDA</ion-select-option>
+          <ion-select-option>BEBIDA</ion-select-option>
+          <ion-select-option>POSTRE</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+
+
+      <!-- imagen -->
+      <ion-item class="image-item">
+        <ion-col size="5">
+          <p *ngIf="errorImagen">Imagenes subidas {{i_NroImagen }} de 3 </p>
+        </ion-col>
+        <ion-col size="7">
+          <div class="mx-auto d-block circular--portrait image-default" (click)="tomarFotoProducto()" #imagen>
+            <ion-icon name="camera-outline"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-item>
+        <!--ion-row class="uploaded-images">
+        <ion-avatar *ngFor="let item of nuevoProducto.img_src; let index=index">
+          <img [src]="item">
+        </ion-avatar> 
+      </ion-row-->
+
+
+        <ion-fab vertical="top" horizontal="end">
+          <ion-fab-button (click)="tomarFotoProducto()">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+
+        <ion-item>
+          <ion-icon name="camera-outline"></ion-icon>
+          <p>Imagenes subidas {{i_NroImagen }} de 3 </p>
+        </ion-item>
+
+
+        <ion-card id="card-img" *ngFor="let item of nuevoProducto.img_src; let index=index">
+          <ion-card-content>
+            <br>
+            <ion-img *ngIf="item ; else no_img" [src]="item"></ion-img>
+
+            <ng-template #no_img>
+              <ion-img src="assets/images/default.jpg"></ion-img>
+            </ng-template>
+
+          </ion-card-content>
+        </ion-card>
+
+
+
+
+
+        <ion-button shape="round" type="submit" fill="solid" class="sign-btn" [disabled]="!form.valid">
+          Crear</ion-button>
+  
+      </form>
+
+    </ion-card-content>
+  </ion-card>
+  <ion-fab (click)="redirectTo('home')" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="home"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
