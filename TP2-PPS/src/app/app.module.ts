@@ -20,13 +20,16 @@ import { SpinnerComponent } from './paginas/spinner/spinner.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MesaModule } from './paginas/mesa/mesa.module';
+// import { AltaComponent } from './paginas/producto/alta/alta.component';
+// import { IdComponent } from './paginas/producto/id/id.component';
+// import { ListaComponent } from './paginas/producto/lista/lista.component';
 
 
 @NgModule({
   declarations: [AppComponent,
     SplashComponent,
     HomeComponent,
-    SpinnerComponent
+    SpinnerComponent,
   ],
 
   entryComponents: [],

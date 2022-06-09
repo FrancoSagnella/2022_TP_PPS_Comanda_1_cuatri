@@ -1,0 +1,34 @@
+<div class="container" *ngIf="this.product$ | async as pro">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-back-button (click)="navigateBack()" slot="start"></ion-back-button>
+      <ion-title size="small">{{ pro.nombreProducto }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+
+    <div class="container-cards">
+      <ion-slides [options]="slideOptsOne">
+        <ion-slide *ngFor="let photo of pro.img_src">
+          <div>
+            <img src="{{ photo }}" />
+          </div>
+        </ion-slide>
+      </ion-slides>
+
+      <div class="container-cards container-resume">
+        <ion-card>
+          <p>{{ pro.descripcion }}</p>
+          <p>vale {{ pro.precio | currency }}</p>
+          <p>demora {{ pro.tiempo }} minutos</p>
+          <p>es {{ pro.tipo }}</p>
+        </ion-card>
+      </div>
+
+    </div>
+
+  </ion-content>
+
+</div>
