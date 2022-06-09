@@ -20,13 +20,16 @@ import { SpinnerComponent } from './paginas/spinner/spinner.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MesaModule } from './paginas/mesa/mesa.module';
+import { ScannerModule } from './componentes/scanner/scanner.module';
+import { ListComponent } from './wait/list/list.component';
 
 
 @NgModule({
   declarations: [AppComponent,
     SplashComponent,
     HomeComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ListComponent,
   ],
 
   entryComponents: [],
@@ -42,7 +45,8 @@ import { MesaModule } from './paginas/mesa/mesa.module';
               positionClass: 'toast-top-center',
               preventDuplicates: true,
               progressBar: true
-            })],
+            }),
+            ScannerModule],
   providers: [Camera,BarcodeScanner,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
 
   bootstrap: [AppComponent],
