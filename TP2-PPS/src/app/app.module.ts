@@ -21,7 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MesaModule } from './paginas/mesa/mesa.module';
 import { ScannerModule } from './componentes/scanner/scanner.module';
-import { ListComponent } from './wait/list/list.component';
+import { ListComponent } from './paginas/wait/list/list.component';
 
 
 @NgModule({
