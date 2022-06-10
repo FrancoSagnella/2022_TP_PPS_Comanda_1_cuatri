@@ -22,8 +22,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MesaModule } from './paginas/mesa/mesa.module';
 import { ScannerModule } from './componentes/scanner/scanner.module';
 import { ListComponent } from './paginas/wait/list/list.component';
-import { ChatComponent } from './paginas/chat/chat.component';
-import { ChatMozoComponent } from './paginas/chat-mozo/chat-mozo.component';
 
 
 @NgModule({
@@ -32,8 +30,6 @@ import { ChatMozoComponent } from './paginas/chat-mozo/chat-mozo.component';
     HomeComponent,
     SpinnerComponent,
     ListComponent,
-    ChatComponent,
-    ChatMozoComponent
   ],
 
   entryComponents: [],

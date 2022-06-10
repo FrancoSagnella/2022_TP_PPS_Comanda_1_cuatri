@@ -80,4 +80,10 @@ export class UsuariosService {
     }
     catch (error) { }
   }
+
+  guardarToken(user:any, token:any){
+    console.log(user);
+    this.bd.collection('usuarios').doc(user.id).update({token:token});
+  }
+
 }

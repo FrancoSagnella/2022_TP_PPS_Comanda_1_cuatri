@@ -29,8 +29,6 @@ export class AuthService {
   async logout(){
     try{
       await this.afAuth.signOut();
-      localStorage.setItem('user', '');
-
       this.currentUser = null;
       return true;
     } catch (e:any) {
@@ -108,15 +106,6 @@ export class AuthService {
         break;
     }
     return ret;
-  }
-  getCurrentUser(): any{
-    let user = JSON.parse(localStorage.getItem("user"));
-    return user;
-  }
-
-  getUid(): string{
-    let user = JSON.parse(localStorage.getItem("user"));
-    return user.id;
   }
 
 }
