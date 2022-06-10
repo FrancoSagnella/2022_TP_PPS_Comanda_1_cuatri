@@ -44,6 +44,7 @@ SEMANA 1 21/05 - 27/05<br>
      - Diseña login - listo<br>
      - Diseña pagina principal - listo<br>
 
+
 SEMANA 2 28/05 - 5/06<br>
   TAREAS DE ALFA: <br>
      - Alta de dueño/supervisor - listo<br>
