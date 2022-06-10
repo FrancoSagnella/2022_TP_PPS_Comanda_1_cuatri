@@ -17,7 +17,7 @@
   </ion-fab>
 
   <!--que solopuedan acceder el mozo  -->
-  <ion-fab *ngIf="this.user.perfil == 'MOZO'"
+  <ion-fab *ngIf="this.user.rol == 'MOZO'"
   vertical="top" horizontal="start" slot="fixed" (click)="redirectTo('chat-mozo')">
     <ion-fab-button>
       <img src="./../../../assets/images/consulta.png" alt="">
