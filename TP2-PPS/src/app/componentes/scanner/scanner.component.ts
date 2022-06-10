@@ -72,6 +72,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
   async scannQR() {
     this.barcodeScanner.scan(this.options).then(barcodeData => {
       const datos = barcodeData.text.split(' ');
+      this.toastr.presentToast(datos[0]+datos[1], 2000, 'danger', 'a');
       this.data = { name: datos[0], id: datos[1], }
 
       // this.data = { name: 'MESA', id: 1 }; //  Pruebas unitarias
@@ -80,21 +81,27 @@ export class ScannerComponent implements OnInit, OnDestroy {
         switch (this.data.name) {
           case 'ENTRADA':
             if (!this.hasWait) {
+              this.toastr.presentToast('entra al switch', 2000, 'danger', 'a');
               this.addToWaitList();
             }
             else if (this.hasWait.estado == 'PENDIENTE') {
+
+              this.toastr.presentToast('Ya solicitó ingreso al local, espere mientras se evalúa', 2000, 'danger', 'Espere');
               // this.toastr.warning('Previamente usted ya solicitó una mesa, en breves se le acercará un recepcionista', 'Lista de espera');
             }
             else if (this.hasWait.estado == 'EN USO') {
+              this.toastr.presentToast('Ya tiene una mesa reservada', 2000, 'danger', 'Error');
               // this.toastr.warning('Usted ya tiene una mesa reservada, por favor consulte al empleado más cercano', 'Lista de espera');
             }
             else if (this.hasWait.estado == 'FINALIZADO') {
+              this.toastr.presentToast('Chau', 2000, 'success', 'a');
               this.addToWaitList();
             }
             break;
 
           case 'MESA':
             if (!this.hasRequest) { //  If first time in restaurant
+              this.toastr.presentToast('Primero debe ser aprobado para ingresar al local', 2000, 'danger', 'Error');
               // this.toastr.warning('Lo sentimos, primero debe anunciarse en recepción', 'QR');
             }
             else if (this.hasRequest.mesa_numero == this.data.id) {
@@ -112,11 +119,13 @@ export class ScannerComponent implements OnInit, OnDestroy {
                   break;
 
                 case 'COBRAR':
+                  this.toastr.presentToast('Se acercara un mozo a cobrarle', 2000, 'success', 'A cobrar');
                   // this.toastr.warning('En breves se le acercará un mozo a cobrarle', 'QR');
                   break;
 
                 case 'COBRADO':
                   if ((new Date().getTime() - this.hasRequest.date_updated) >= (10 * 60 * 60 * 1000)) {  //  If pass 10 hours of last pedido
+                    this.toastr.presentToast('Se le asignó la mesa Numero: ' + this.hasRequest.mesa_numero, 2000, 'success', 'Cobrado');
                     // this.toastr.warning('La mesa que se le asignó es: Nº ' + this.hasRequest.mesa_numero, 'QR');
                   }
                   else {  //  If is the table selected
@@ -125,6 +134,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
                   break;
 
                 default:
+                  this.toastr.presentToast('Le recomendamos que se dirija a recepción para que le asigne una mesa', 2000, 'danger', 'Error');
                   // this.toastr.warning('Le recomendamos que se dirija a recepción para que le asigne una mesa', 'QR');
                   break;
               }
@@ -132,6 +142,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
             break;
 
           default:
+            this.toastr.presentToast('El QR escaneado es inválido', 2000, 'danger', 'Error');
             // this.toastr.warning('QR no perteneciente a ARM-Restaurante..', 'QR');
             break;
         }
