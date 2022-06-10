@@ -80,6 +80,7 @@ export class LoginComponent implements OnInit {
 
 
   async onLogin() {
+    alert(this.email)
     const auth = await this.authService.login(this.email, this.password);
     let dataUser;
     this.userService.getByEmail(this.email).subscribe(data => {
@@ -87,6 +88,8 @@ export class LoginComponent implements OnInit {
     });
 
     const sub = this.userService.getByEmail(this.email).subscribe(data => {
+      console.log(data)
+      //alert(auth)
       if (auth && data) {
         if (data.estado == 'ACEPTADO') {
           // this.vibration.vibrate([500]);

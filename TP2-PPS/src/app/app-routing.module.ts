@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ChatMozoComponent } from './paginas/chat-mozo/chat-mozo.component';
+import { ChatComponent } from './paginas/chat/chat.component';
 import { HomeComponent } from './paginas/home/home.component';
 import { AltaComponent } from './paginas/producto/alta/alta.component';
 
@@ -22,7 +24,9 @@ const routes: Routes = [
     loadChildren: () => import('./paginas/producto/producto.module').then(m => m.ProductoModule),
   },
   {path:'wait/list', component:ListComponent},
-  {path:'**', redirectTo:'home', pathMatch:'full'},
+  {path:'chat', component:ChatComponent},
+  {path:'chatMozo', component:ChatMozoComponent},
+  {path:'**', redirectTo:'login', pathMatch:'full'},
 ];
 @NgModule({
   imports: [
