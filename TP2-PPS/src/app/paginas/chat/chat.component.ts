@@ -91,7 +91,7 @@ export class ChatComponent implements OnInit {
     .then(() => {
       if(this.currentUser.perfil == eRol.CLIENTE){
 
-       alert("mensaje nuevo");
+      //  alert("mensaje nuevo");
       }
     });
     this.mensaje = "";
