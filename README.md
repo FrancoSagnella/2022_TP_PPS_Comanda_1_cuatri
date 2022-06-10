@@ -42,7 +42,7 @@ SEMANA 1 21/05 - 27/05<br>
      - Diseña registro - listo<br>
    TAREAS DE GAMMA<br>
      - Diseña login - listo<br>
-     - Diseña pagina principal - listo<br>
+     - Diseña pagina principal - listo<br><br>
 
 
 SEMANA 2 28/05 - 5/06<br>
