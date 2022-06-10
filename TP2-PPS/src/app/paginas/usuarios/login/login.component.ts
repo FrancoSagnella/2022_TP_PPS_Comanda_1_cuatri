@@ -80,7 +80,6 @@ export class LoginComponent implements OnInit {
 
 
   async onLogin() {
-    alert(this.email)
     const auth = await this.authService.login(this.email, this.password);
     let dataUser;
     this.userService.getByEmail(this.email).subscribe(data => {

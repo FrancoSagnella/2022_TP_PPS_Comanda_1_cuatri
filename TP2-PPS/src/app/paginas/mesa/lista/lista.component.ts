@@ -62,7 +62,7 @@ export class ListaComponent implements OnInit {
 
   setStatus($event, user) {
     user.estado = $event.target.value;
-    this.mesaService.setOne(user);
+    this.mesaService.setOne(user,'');
   }
 
 }

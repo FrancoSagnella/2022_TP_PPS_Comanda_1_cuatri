@@ -19,25 +19,25 @@ export class ChatComponent implements OnInit {
   currentMesaCliente: any;
   currentUser: any; //puede ser mozo o cliente
   currentUid:string;
-  title:string; 
+  title:string;
 
   chatForm: FormGroup;
   mensaje:string;
   mensajes:Message[];
-  showSpinner:boolean;  
-  bgSala:string;    
+  showSpinner:boolean;
+  bgSala:string;
   constructor(private pedidosSrv:PedidoService,
-    private mesaCliente:MesaClienteService, 
+    private mesaCliente:MesaClienteService,
     private authService:AuthService,
     private router:Router ,
-    private mjeService: ChatService,  
-    private fb:FormBuilder  ) { 
-      this.mensaje="";    
-      this.bgSala = "container cont-chat";    
+    private mjeService: ChatService,
+    private fb:FormBuilder  ) {
+      this.mensaje="";
+      this.bgSala = "container cont-chat";
       this.mensajes=[];
     }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
     this.currentUid = this.authService.getUid();
 
@@ -45,23 +45,26 @@ export class ChatComponent implements OnInit {
 
       this.mensajes = data;
       this.mensajes.sort();
- 
+
       console.log(data);
     });
 
-   
-    this.mesaCliente.TraerMesaCliente().subscribe( data =>{ 
-      this.mesasCliente = data;             
-      this.currentMesaCliente = this.mesasCliente.find( x =>  x.user_uid == this.currentUid);
-      console.log('mesa cliente: '+this.currentMesaCliente);        
+
+    this.mesaCliente.TraerMesaCliente().subscribe( data =>{
+      // this.mesasCliente = data;
+      console.log(data);
+
+      console.log(data.find( x =>  x.user_uid == this.currentUid));
+      this.currentMesaCliente = data.find( x =>  x.user_uid == this.currentUid);
+      console.log('mesa cliente: '+this.currentMesaCliente);
       this.title = "Mesa "  + this.currentMesaCliente.nro_mesa;
-      
+
     });
- 
+
 
     this.chatForm = this.fb.group({
-      messageCtrl:['', [Validators.required]],      
-    }); 
+      messageCtrl:['', [Validators.required]],
+    });
   }
 
   return(){
@@ -69,7 +72,7 @@ export class ChatComponent implements OnInit {
   }
 
 
-  enviarMje(){         
+  enviarMje(){
     var mje: Message =  {
       message :  this.mensaje,
       userEmail : this.currentUser.correo,
@@ -81,16 +84,16 @@ export class ChatComponent implements OnInit {
       uid: this.currentUser.id,
       rol:  this.currentUser.perfil == eRol.CLIENTE? "Cliente" : "Mozo",
       mesaClienteId!:  this.currentMesaCliente.nro_mesa
-    };  
-   
-    this.mjeService.setChatCollection((this.currentMesaCliente.id_mesa)); 
+    };
+
+    this.mjeService.setChatCollection((this.currentMesaCliente.id_mesa));
     this.mjeService.setItemWithId(mje, mje.fecha.toString())
     .then(() => {
       if(this.currentUser.perfil == eRol.CLIENTE){
-        
+
        alert("mensaje nuevo");
-      }      
-    });     
+      }
+    });
     this.mensaje = "";
   }
 

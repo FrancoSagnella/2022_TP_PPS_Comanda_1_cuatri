@@ -28,9 +28,9 @@ export class MesaService {
     catch (err) { console.log(err); }
   }
 
-  public async setOne(model: Mesa) {
+  public async setOne(model: Mesa,user_uid:string) {
     try {
-      this.AsignarMesaCliente(model.numero, model.id, '', model.estado);
+      this.AsignarMesaCliente(model.numero, model.id, user_uid, model.estado);
       return this.referenceToCollection.doc(model.id).set({ ...model });
   }
     catch (err) { console.log(err); }

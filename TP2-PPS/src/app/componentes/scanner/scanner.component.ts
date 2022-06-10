@@ -72,7 +72,6 @@ export class ScannerComponent implements OnInit, OnDestroy {
   async scannQR() {
     this.barcodeScanner.scan(this.options).then(barcodeData => {
       const datos = barcodeData.text.split(' ');
-      this.toastr.presentToast(datos[0]+datos[1], 2000, 'danger', 'a');
       this.data = { name: datos[0], id: datos[1], }
 
       // this.data = { name: 'MESA', id: 1 }; //  Pruebas unitarias
@@ -81,7 +80,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
         switch (this.data.name) {
           case 'ENTRADA':
             if (!this.hasWait) {
-              this.toastr.presentToast('entra al switch', 2000, 'danger', 'a');
+              this.toastr.presentToast('Ingresó al locla, aguarde mientras se le asigna una mesa', 2000, 'success', 'Hecho');
               this.addToWaitList();
             }
             else if (this.hasWait.estado == 'PENDIENTE') {
@@ -107,7 +106,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
             else if (this.hasRequest.mesa_numero == this.data.id) {
               switch (this.hasRequest.estado) {
                 case 'PENDIENTE':
-                  this.router.navigate(['/producto/list']);
+                  this.router.navigate(['/producto/lista']);
                   break;
 
                 case 'ACEPTADO':
@@ -167,7 +166,8 @@ export class ScannerComponent implements OnInit, OnDestroy {
       id: '',
       estado: 'PENDIENTE',
       correo: this.user.correo,
-      date_created: new Date().getTime()
+      date_created: new Date().getTime(),
+      user_uid: this.user.id
     }
 
     return m;

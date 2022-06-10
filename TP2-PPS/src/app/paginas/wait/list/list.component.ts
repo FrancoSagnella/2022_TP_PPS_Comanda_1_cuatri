@@ -74,7 +74,7 @@ export class ListComponent implements OnInit {
     this.waitService.setOne(this.waitSelected);
 
     model.estado = 'RESERVADO';
-    this.tableService.setOne(model);
+    this.tableService.setOne(model,this.waitSelected.user_uid);
 
     let p: Pedido = this.createModelPedido(model);
     this.pedidoService.createOne(p);
@@ -97,7 +97,7 @@ export class ListComponent implements OnInit {
 
         const b = this.tableService.getByNumber(data.mesa_numero).subscribe((mesa: Mesa) => {
           mesa.estado = 'DISPONIBLE';
-          this.tableService.setOne(mesa);
+          this.tableService.setOne(mesa,'');
           b.unsubscribe();
         });
 
