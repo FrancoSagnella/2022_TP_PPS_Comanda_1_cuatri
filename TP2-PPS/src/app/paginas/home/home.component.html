@@ -12,14 +12,16 @@
   <ion-fab  *ngIf="this.user.perfil == 'CLIENTE' || this.user.perfil == 'ANONIMO'"
    vertical="top" horizontal="start" slot="fixed" (click)="redirectTo('chat')">
     <ion-fab-button>
+      Chat
       <img src="./../../../assets/images/consulta.png" alt="">
     </ion-fab-button>
   </ion-fab>
 
   <!--que solopuedan acceder el mozo  -->
   <ion-fab *ngIf="this.user.rol == 'MOZO'"
-  vertical="top" horizontal="start" slot="fixed" (click)="redirectTo('chat-mozo')">
+  vertical="top" horizontal="start" slot="fixed" (click)="redirectTo('chatMozo')">
     <ion-fab-button>
+        Chat
       <img src="./../../../assets/images/consulta.png" alt="">
     </ion-fab-button>
   </ion-fab>
