@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'producto',
     loadChildren: () => import('./paginas/producto/producto.module').then(m => m.ProductoModule),
   },
+  {
+    path: 'pedido',
+    loadChildren: () => import('./paginas/pedidos/pedidos.module').then(m => m.PedidosModule),
+  },
   {path:'wait/list', component:ListComponent},
   {path:'chat', component:ChatComponent},
   {path:'chatMozo', component:ChatMozoComponent},
