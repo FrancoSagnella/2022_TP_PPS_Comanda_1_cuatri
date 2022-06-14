@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'pedido',
     loadChildren: () => import('./paginas/pedidos/pedidos.module').then(m => m.PedidosModule),
   },
+  {
+    path: 'encuesta',
+    loadChildren: () => import('./paginas/encuesta/encuesta.module').then(m => m.EncuestaModule),
+  },
   {path:'wait/list', component:ListComponent},
   {path:'chat', component:ChatComponent},
   {path:'chatMozo', component:ChatMozoComponent},

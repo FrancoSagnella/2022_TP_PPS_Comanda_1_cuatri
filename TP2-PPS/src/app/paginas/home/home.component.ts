@@ -23,16 +23,16 @@ export class HomeComponent implements OnInit {
 
     //  Supervisor
     { img: 'assets/pizza.png', url: 'usuarios/altaDuenio', profile: 'SUPERVISOR', title: 'Agregar Empleado' },
-    // { img: 'assets/pizza.png', url: 'none', profile: 'SUPERVISOR', title: 'Ver Encuestas' },
+    // { img: 'assets/pizza.png', url: 'none', profile: 'SUPERVISOR', title: 'Ver Encuestas' }, //PERO NO HACE NADA XD
     // { img: 'assets/images/default.jpg', url: 'none', profile: 'SUPERVISOR', title: 'Crear Encuesta' },
 
     //  Cocinero
-    // { img: 'assets/images/product.png', url: 'producto/alta', profile: 'COCINERO', title: 'Agregar Plato/Bebida' },
+    { img: 'assets/pizza.png', url: 'producto/alta', profile: 'COCINERO', title: 'Agregar Plato/Bebida' },
     { img: 'assets/pizza.png', url: 'none', profile: 'COCINERO', title: 'Tomar Pedido' },
     // { img: 'assets/images/encuesta.png', url: 'encuesta/empleado', profile: 'COCINERO', title: 'Encuesta' },
 
     //  Bartender
-    // { img: 'assets/images/product.png', url: 'producto/alta', profile: 'BARTENDER', title: 'Agregar Plato/Bebida' },
+    { img: 'assets/pizza.png', url: 'producto/alta', profile: 'BARTENDER', title: 'Agregar Plato/Bebida' },
     { img: 'assets/pizza.png', url: 'none', profile: 'BARTENDER', title: 'Tomar Pedido' },
     // { img: 'assets/images/encuesta.png', url: 'encuesta/empleado', profile: 'BARTENDER', title: 'Encuesta' },
 
@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
 
     //  Mozo
     { img: 'assets/pizza.png', url: 'usuarios/altaCliente', profile: 'MOZO', title: 'Agregar Cliente' },
-    // { img: 'assets/pizza.png', url: 'pedido/list', profile: 'MOZO', title: 'Listar Pedidos' },
+    { img: 'assets/pizza.png', url: 'pedido/list', profile: 'MOZO', title: 'Listar Pedidos' },
     // { img: 'assets/images/encuesta.png', url: 'encuesta/empleado', profile: 'MOZO', title: 'Encuesta' },
 
     //  Metre
