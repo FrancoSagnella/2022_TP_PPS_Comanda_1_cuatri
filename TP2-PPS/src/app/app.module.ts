@@ -24,6 +24,7 @@ import { ScannerModule } from './componentes/scanner/scanner.module';
 import { ListComponent } from './paginas/wait/list/list.component';
 import { ChatComponent } from './paginas/chat/chat.component';
 import { ChatMozoComponent } from './paginas/chat-mozo/chat-mozo.component';
+import { IdComponent } from './paginas/game/id/id.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ChatMozoComponent } from './paginas/chat-mozo/chat-mozo.component';
     SpinnerComponent,
     ListComponent,
     ChatComponent,
-    ChatMozoComponent
+    ChatMozoComponent,
+    IdComponent
   ],
 
   entryComponents: [],
