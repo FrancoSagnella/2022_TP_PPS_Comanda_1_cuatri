@@ -45,7 +45,7 @@ export class PedidoService {
     try {
       return this.getAll().pipe(
         map(requests => requests.filter(
-          u => u.estado == 'PENDIENTE' || u.estado == 'ACEPTADO' ||
+          u => u.estado == 'PENDIENTE' || u.estado == 'ACEPTADO' || u.estado == 'PREPARACION' || u.estado == 'COCINADO' || u.estado == 'ENTREGADO' ||
             u.estado == 'CONFIRMADO' || u.estado == 'COBRAR'
         )));
     }
@@ -62,6 +62,18 @@ export class PedidoService {
 
   getAceptados() {
     return this.getByStatus('ACEPTADO') as Observable<Pedido[]>;
+  }
+
+  getPreparacion() {
+    return this.getByStatus('PREPARACION') as Observable<Pedido[]>;
+  }
+
+  getCocinado() {
+    return this.getByStatus('COCINADO') as Observable<Pedido[]>;
+  }
+
+  getEntregado() {
+    return this.getByStatus('ENTREGADO') as Observable<Pedido[]>;
   }
 
   getConfirmados() {

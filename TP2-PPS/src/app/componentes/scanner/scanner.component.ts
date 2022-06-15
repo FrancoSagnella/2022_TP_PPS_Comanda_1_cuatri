@@ -109,7 +109,13 @@ export class ScannerComponent implements OnInit, OnDestroy {
                   this.router.navigate(['/producto/lista']);
                   break;
 
-                case 'ACEPTADO':
+                case 'ACEPTADO': //Paracee en la lista del cocinero
+                  break;
+                
+                case 'PREPARACION'://El cocinero lo pone en preparacion
+                  break;
+                
+                case 'COCINADO':
                   this.router.navigate(['/pedido/id/' + this.hasRequest.id]);
                   break;
 
