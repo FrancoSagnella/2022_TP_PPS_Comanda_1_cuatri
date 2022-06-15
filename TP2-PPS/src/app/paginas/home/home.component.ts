@@ -28,12 +28,14 @@ export class HomeComponent implements OnInit {
 
     //  Cocinero
     { img: 'assets/pizza.png', url: 'producto/alta', profile: 'COCINERO', title: 'Agregar Plato/Bebida' },
-    { img: 'assets/pizza.png', url: 'none', profile: 'COCINERO', title: 'Tomar Pedido' },
+    { img: 'assets/pizza.png', url: 'pedido/list', profile: 'COCINERO', title: 'Listar Pedidos'},
+    // { img: 'assets/pizza.png', url: 'none', profile: 'COCINERO', title: 'Tomar Pedido' },
     // { img: 'assets/images/encuesta.png', url: 'encuesta/empleado', profile: 'COCINERO', title: 'Encuesta' },
 
     //  Bartender
     { img: 'assets/pizza.png', url: 'producto/alta', profile: 'BARTENDER', title: 'Agregar Plato/Bebida' },
-    { img: 'assets/pizza.png', url: 'none', profile: 'BARTENDER', title: 'Tomar Pedido' },
+    { img: 'assets/pizza.png', url: 'pedido/list', profile: 'BARTENDER', title: 'Listar Pedidos'},
+    // { img: 'assets/pizza.png', url: 'none', profile: 'BARTENDER', title: 'Tomar Pedido' },
     // { img: 'assets/images/encuesta.png', url: 'encuesta/empleado', profile: 'BARTENDER', title: 'Encuesta' },
 
     //  Repartidor

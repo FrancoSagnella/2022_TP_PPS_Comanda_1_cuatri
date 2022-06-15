@@ -32,31 +32,43 @@
           <p *ngIf="pedido.descuento != 'GANO'">MONTO TOTAL: ( {{ this.getAcum() | currency }} )</p>
           <p *ngIf="pedido.descuento == 'GANO'">MONTO TOTAL:  {{ this.getAcum(pedido) | currency }} (con descuento)</p>
           <p>TIEMPO ESTIMADO: {{ this.getAproxFinish(pedido) }} minutos</p>
+          <p>ESTADO DEL PEDIDO: {{ pedido.estado }}</p>
 
           <div *ngIf="pedido.estado == 'PENDIENTE'">
-            <ion-button (click)="redirectTo('producto/list')">EDITAR</ion-button>
+            <ion-button (click)="redirectTo('producto/lista')">EDITAR</ion-button>
             <ion-button (click)="clickPendiente(pedido)">CONFIRMAR</ion-button>
           </div>
 
-          <div *ngIf="pedido.estado == 'ACEPTADO'">
+          <div *ngIf="pedido.estado == 'ENTREGADO'">
             <ion-button (click)="clickRecibido(pedido)">RECIBIDO</ion-button>
           </div>
 
-          <div *ngIf="pedido.estado == 'ACEPTADO' && pedido.descuento == 'NO JUGO'">
+          <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO') && pedido.descuento == 'NO JUGO'">
             <br>
             <p>¿Le interesa ganar un descuento del 10% en su pedido? haz click aquí:</p>
             <ion-button (click)="clickJuego(pedido)">JUGAR</ion-button>
           </div>
 
-          <div *ngIf="pedido.estado == 'CONFIRMADO'">
-            <ion-button (click)="clickCobrar(pedido)">PAGAR</ion-button>
-          </div>
 
-          <div *ngIf="pedido.estado == 'COBRADO'">
+
+          <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO' || pedido.estado == 'COBRAR' || pedido.estado == 'COBRADO') && !pedido.encuestado">
             <br>
             <p>¿Le interesa ser parte de una breve encuesta?</p>
             <ion-button (click)="redirectTo('encuesta/cliente')">PARTICIPAR</ion-button>
           </div>
+
+          <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO' || pedido.estado == 'COBRAR' || pedido.estado == 'COBRADO') && pedido.encuestado">
+            <br>
+            <p>Podes ver los resultados de las encuestas!</p>
+            <!-- <ion-button (click)="redirectTo('encuesta/cliente')">VER</ion-button> -->
+            <ion-button >VER</ion-button>
+          </div>
+
+          <!-- Esto tendria que abrir una pantalla, donde se visualicen los detalles de los costos, y deje poner propina -->
+          <div *ngIf="pedido.estado == 'CONFIRMADO'">
+            <ion-button (click)="clickCobrar(pedido)">PEDIR CUENTA</ion-button>
+          </div>
+
 
         </ion-card>
       </div>

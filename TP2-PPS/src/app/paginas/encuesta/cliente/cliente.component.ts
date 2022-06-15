@@ -79,7 +79,8 @@ export class ClienteComponent implements OnInit {
 
     this.db.addData('encuestasCliente', json);
 
-    request.estado = 'ENCUESTADO';
+    // request.estado = 'ENCUESTADO';
+    request.encuestado = true;
     request.date_updated = new Date().getTime();
     this.pedidoService.setOne(request);
     localStorage.removeItem('products');

@@ -7,59 +7,128 @@
 <ion-content>
 
   <div class="container-cards">
-    <div style="all:unset;" *ngFor="let req of this.requests$ | async as requests">
+    <!-- EL LISTADO PARA LOS MOZOS -->
+    <div *ngIf="user.rol == 'MOZO'">
+      <div style="all:unset;" *ngFor="let req of this.requests$ | async as requests">
 
-      <ion-card class="card-shadow">
+        <ion-card class="card-shadow">
 
-        <div class="details">
-          <p>Usuario: {{ req.correo }}</p>
-          <p>Mesa: {{ req.mesa_numero }}</p>
-          <p>Estado: {{ req.estado }}</p>
-          <p *ngIf="req.estado == 'COBRAR'">Total: {{ this.getTotal(req) | currency }}</p>
-          <p>Fecha: {{ req.date_created | date:'short' }}</p>
+          <div class="details">
+            <p>Usuario: {{ req.correo }}</p>
+            <p>Mesa: {{ req.mesa_numero }}</p>
+            <p>Estado: {{ req.estado }}</p>
+            <p *ngIf="req.estado == 'COBRAR'">Total: {{ this.getTotal(req) | currency }}</p>
+            <p>Fecha: {{ req.date_created | date:'short' }}</p>
 
-          <div class="container-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>
-                    <ion-button *ngIf="req.estado == 'PENDIENTE'" (click)="setStatus(req, 'CANCELADO')"
-                      id="btn-decline">👎</ion-button>
-                  </th>
-                  <th>
-                    <p>{{ this.getQuestion(req.estado) }}</p>
-                  </th>
-                  <th></th>
-                  <th *ngIf="req.estado == 'PENDIENTE'">
-                    <ion-button (click)="setStatus(req, 'ACEPTADO')" id="btn-confirm">👍</ion-button>
-                  </th>
-                  <th *ngIf="req.estado == 'COBRAR'">
-                    <ion-button (click)="setStatus(req, 'COBRADO')" id="btn-confirm">👍</ion-button>
-                  </th>
-                </tr>
-              </thead>
+            <div class="container-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>
+                      <ion-button *ngIf="req.estado == 'PENDIENTE'" (click)="setStatus(req, 'CANCELADO')"
+                        id="btn-decline">Cancelar</ion-button>
+                      <ion-button *ngIf="req.estado == 'COCINADO'" (click)="setStatus(req, 'ENTREGADO')">Entregar</ion-button>
+                    </th>
+                    <th>
+                      <p>{{ this.getQuestion(req.estado) }}</p>
+                    </th>
+                    <th></th>
+                    <th *ngIf="req.estado == 'PENDIENTE'">
+                      <ion-button (click)="setStatus(req, 'ACEPTADO')" id="btn-confirm">Aceptar</ion-button>
+                    </th>
+                    <th *ngIf="req.estado == 'COBRAR'">
+                      <ion-button (click)="setStatus(req, 'COBRADO')" id="btn-confirm">Cobrar</ion-button>
+                    </th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                <tr *ngFor="let product of req.producto_id">
-                  <td (click)="clickDetails(product)"> 👁️ </td>
-                  <td>
-                    <p>{{ product.nombreProducto }}</p>
-                  </td>
-                  <td>
-                    <p>{{product.precio | currency }}</p>
-                  </td>
-                  <td>
-                    <p>{{product.quantity }} unidad</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                <tbody>
+                  <tr *ngFor="let product of req.producto_id">
+                    <td (click)="clickDetails(product)"> 👁️ </td>
+                    <td>
+                      <p>{{ product.nombreProducto }}</p>
+                    </td>
+                    <td>
+                      <p>{{product.precio | currency }}</p>
+                    </td>
+                    <td>
+                      <p>{{product.quantity }} unidad</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
           </div>
 
-        </div>
-      </ion-card>
+        </ion-card>
 
+      </div>
     </div>
+
+
+
+    <!-- EL LISTADO PARA LOS COCINEROS -->
+    <div *ngIf="user.rol == 'COCINERO' || user.rol == 'BARTENDER'">
+      <div style="all:unset;" *ngFor="let req of this.requests$ | async as requests">
+
+        <ion-card class="card-shadow" *ngIf="req.estado == 'ACEPTADO' || req.estado == 'PREPARACION' || req.estado == 'COCINADO'">
+
+          <div class="details">
+            <p>Usuario: {{ req.correo }}</p>
+            <p>Mesa: {{ req.mesa_numero }}</p>
+            <p>Estado: {{ req.estado }}</p>
+            <p>Fecha: {{ req.date_created | date:'short' }}</p>
+
+            <div class="container-table">
+              <table>
+                <thead>
+                  <tr>
+                    <!-- <th>
+                      <ion-button *ngIf="req.estado == 'PENDIENTE'" (click)="setStatus(req, 'CANCELADO')"
+                        id="btn-decline">👎</ion-button>
+                    </th>
+                    <th>
+                      <p>{{ this.getQuestion(req.estado) }}</p>
+                    </th>
+                    <th></th>
+                    <th *ngIf="req.estado == 'PENDIENTE'">
+                      <ion-button (click)="setStatus(req, 'ACEPTADO')" id="btn-confirm">👍</ion-button>
+                    </th>
+                    <th *ngIf="req.estado == 'COBRAR'">
+                      <ion-button (click)="setStatus(req, 'COBRADO')" id="btn-confirm">👍</ion-button>
+                    </th> -->
+                    <th>
+                      <ion-button *ngIf="req.estado == 'ACEPTADO'" (click)="setStatus(req, 'PREPARACION')" id="btn-confirm">Preparar</ion-button>
+                      <ion-button *ngIf="req.estado == 'PREPARACION'" (click)="setStatus(req, 'COCINADO')" id="btn-confirm">Terminar</ion-button>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let product of req.producto_id">
+                    <td (click)="clickDetails(product)"> 👁️ </td>
+                    <td>
+                      <p>{{ product.nombreProducto }}</p>
+                    </td>
+                    <td>
+                      <p>{{product.precio | currency }}</p>
+                    </td>
+                    <td>
+                      <p>{{product.quantity }} unidad</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </ion-card>
+
+      </div>
+    </div>
+
   </div>
 
   <ion-fab (click)="redirectTo('home')" vertical="bottom" horizontal="start" slot="fixed">

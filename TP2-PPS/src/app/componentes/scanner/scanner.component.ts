@@ -110,15 +110,9 @@ export class ScannerComponent implements OnInit, OnDestroy {
                   break;
 
                 case 'ACEPTADO': //Paracee en la lista del cocinero
-                  break;
-                
                 case 'PREPARACION'://El cocinero lo pone en preparacion
-                  break;
-                
                 case 'COCINADO':
-                  this.router.navigate(['/pedido/id/' + this.hasRequest.id]);
-                  break;
-
+                case 'ENTREGADO':
                 case 'CONFIRMADO':
                   this.router.navigate(['/pedido/id/' + this.hasRequest.id]);
                   break;

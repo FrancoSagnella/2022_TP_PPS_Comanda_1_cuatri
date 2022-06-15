@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ChatMozoComponent } from './paginas/chat-mozo/chat-mozo.component';
 import { ChatComponent } from './paginas/chat/chat.component';
+import { IdComponent } from './paginas/game/id/id.component';
 import { HomeComponent } from './paginas/home/home.component';
 import { AltaComponent } from './paginas/producto/alta/alta.component';
 
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path:'wait/list', component:ListComponent},
   {path:'chat', component:ChatComponent},
   {path:'chatMozo', component:ChatMozoComponent},
+  {path:'game/:id', component:IdComponent},
   {path:'**', redirectTo:'login', pathMatch:'full'},
 ];
 @NgModule({

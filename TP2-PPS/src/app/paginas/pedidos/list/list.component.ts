@@ -17,6 +17,7 @@ import { WaitService } from 'src/app/services/wait.service';
 })
 export class ListComponent implements OnInit {
 
+  public user;
   requests$: Observable<any>;
 
   tables: any;
@@ -38,6 +39,7 @@ export class ListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getUser();
     this.kyndSelected = this.kynds[0];
     this.getRequests(this.kyndSelected.val);
 
@@ -150,5 +152,9 @@ export class ListComponent implements OnInit {
 
   redirectTo(path: string) {
     this.router.navigate([path]);
+  }
+
+  getUser() {
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
 }
