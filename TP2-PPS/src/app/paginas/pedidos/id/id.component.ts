@@ -84,19 +84,19 @@ export class IdComponent implements OnInit {
     this.qrProducto.scan(this.options).then(barcodeData => {
       const datos = barcodeData.text;
       switch(datos){
-        case '0':
+        case 'MALO':
           this.propina = 0;
             break;
-        case '5':
+        case 'REGULAR':
           this.propina = this.getAcum() * 0.05;
             break;
-        case '10':
+        case 'BUENO':
           this.propina = this.getAcum() * 0.1;
             break;
-        case '15':
+        case 'MUY BUENO':
           this.propina = this.getAcum() * 0.15;
             break;
-        case '20':
+        case 'EXCELENTE':
           this.propina = this.getAcum() * 0.2;
             break;
       }
