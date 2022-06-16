@@ -29,8 +29,8 @@
 
       <div class="container-cards container-resume" *ngIf="!this.pedirCuenta">
         <ion-card>
-          <p *ngIf="pedido.descuento != 'GANO'">MONTO TOTAL: ( {{ this.getAcum() | currency }} )</p>
-          <p *ngIf="pedido.descuento == 'GANO'">MONTO TOTAL:  {{ this.getAcum(pedido) | currency }} (con descuento)</p>
+          <p *ngIf="pedido.descuento10 != 'GANO' && pedido.descuento15 != 'GANO' && pedido.descuento20 != 'GANO'">MONTO TOTAL: ( {{ this.getAcum() | currency }} )</p>
+          <p *ngIf="pedido.descuento10 == 'GANO' || pedido.descuento15 == 'GANO' || pedido.descuento20 == 'GANO'">MONTO TOTAL:  {{ this.getAcum(pedido) | currency }} (con descuento)</p>
           <p>TIEMPO ESTIMADO: {{ this.getAproxFinish(pedido) }} minutos</p>
           <p>ESTADO DEL PEDIDO: {{ pedido.estado }}</p>
 
@@ -93,12 +93,9 @@
       <!-- Visualizacion de la cuenta -->
       <div class="container-cards container-resume" *ngIf="this.pedirCuenta">
         <ion-card>
-          <p *ngIf="pedido.descuento == 'GANO'">MONTO DESCONTADO: {{ this.getAcum() * 0.1 | currency}}</p>
-          <p *ngIf="pedido.descuento != 'GANO'">MONTO DESCONTADO: $0.00</p>
+          <p>MONTO DESCONTADO: {{ this.getDescontado(pedido) | currency}}</p>
           <p>PROPINA: {{ this.propina | currency}}</p>
-          <p *ngIf="pedido.descuento == 'GANO'">MONTO TOTAL:  {{ this.getAcum(pedido) + this.propina | currency }} </p>
-          <p *ngIf="pedido.descuento != 'GANO'">MONTO TOTAL:  {{ this.getAcum() + this.propina | currency }} </p>
-
+          <p>MONTO TOTAL:  {{ this.getAcum(pedido) + this.propina | currency }} </p>
 
           <ion-button (click)="agregarPropina()">ESCANEAR PROPINA</ion-button><br>
           <ion-button (click)="clickCobrar(pedido)">PAGAR</ion-button>
