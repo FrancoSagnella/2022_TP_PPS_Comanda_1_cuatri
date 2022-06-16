@@ -71,6 +71,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     // let audio = new Audio('./assets/sounds/noti.mp3');
     // audio.play();
+    this.getUser();
   }
 
   getUser() {
