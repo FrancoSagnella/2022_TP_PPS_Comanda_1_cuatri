@@ -129,7 +129,7 @@ export class IdComponent implements OnInit {
 
     this.getProductsSelected().forEach(p => { a += (p.quantity * p.precio) });
 
-    if(pedido && pedido.descuento == 'GANO'){
+    if(pedido && pedido.descuento10 == 'GANO'){
       a = a - (a * 0.1);
     }
 
@@ -246,8 +246,16 @@ export class IdComponent implements OnInit {
      }*/
   }
 
-  clickJuego(pedido: Pedido) {
+  clickJuego10(pedido: Pedido) {
     this.redirectTo('/game/' + pedido.id);
+  }
+
+  clickJuego15(pedido: Pedido) {
+    this.redirectTo('/juego15/' + pedido.id);
+  }
+
+  clickJuego20(pedido: Pedido) {
+    this.redirectTo('/juego20/' + pedido.id);
   }
 
 

@@ -43,10 +43,22 @@
             <ion-button (click)="clickRecibido(pedido)">RECIBIDO</ion-button>
           </div>
 
-          <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO') && pedido.descuento == 'NO JUGO'">
+          <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO') && pedido.descuento10 == 'NO JUGO'">
             <br>
             <p>¿Le interesa ganar un descuento del 10% en su pedido? haz click aquí:</p>
-            <ion-button (click)="clickJuego(pedido)">JUGAR</ion-button>
+            <ion-button (click)="clickJuego10(pedido)">JUGAR</ion-button>
+          </div>
+
+          <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO') && pedido.descuento15 == 'NO JUGO'">
+            <br>
+            <p>¿Le interesa ganar un descuento del 15% en su pedido? haz click aquí:</p>
+            <ion-button (click)="clickJuego15(pedido)">JUGAR</ion-button>
+          </div>
+
+          <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO') && pedido.descuento20 == 'NO JUGO'">
+            <br>
+            <p>¿Le interesa ganar un descuento del 20% en su pedido? haz click aquí:</p>
+            <ion-button (click)="clickJuego20(pedido)">JUGAR</ion-button>
           </div>
 
 

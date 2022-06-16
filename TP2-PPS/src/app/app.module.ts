@@ -25,6 +25,8 @@ import { ListComponent } from './paginas/wait/list/list.component';
 import { ChatComponent } from './paginas/chat/chat.component';
 import { ChatMozoComponent } from './paginas/chat-mozo/chat-mozo.component';
 import { IdComponent } from './paginas/game/id/id.component';
+import { Juego15Component } from './paginas/game/juego15/juego15.component';
+import { Juego20Component } from './paginas/game/juego20/juego20.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { IdComponent } from './paginas/game/id/id.component';
     ListComponent,
     ChatComponent,
     ChatMozoComponent,
-    IdComponent
+    IdComponent,
+    Juego15Component,
+    Juego20Component,
   ],
 
   entryComponents: [],

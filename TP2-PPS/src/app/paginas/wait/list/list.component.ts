@@ -131,7 +131,9 @@ export class ListComponent implements OnInit {
       date_updated: new Date().getTime(),
       estado: 'PENDIENTE',
       encuestado:false,
-      descuento: 'NO JUGO'
+      descuento10: 'NO JUGO',
+      descuento15:'NO JUGO',
+      descuento20:'NO JUGO'
     }
     return m;
   }
