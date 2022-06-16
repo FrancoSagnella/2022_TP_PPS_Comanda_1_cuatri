@@ -27,39 +27,85 @@
         </table>
       </ion-card>
 
-      <div class="container-cards container-resume">
+      <div class="container-cards container-resume" *ngIf="!this.pedirCuenta">
         <ion-card>
           <p *ngIf="pedido.descuento != 'GANO'">MONTO TOTAL: ( {{ this.getAcum() | currency }} )</p>
           <p *ngIf="pedido.descuento == 'GANO'">MONTO TOTAL:  {{ this.getAcum(pedido) | currency }} (con descuento)</p>
           <p>TIEMPO ESTIMADO: {{ this.getAproxFinish(pedido) }} minutos</p>
+          <p>ESTADO DEL PEDIDO: {{ pedido.estado }}</p>
 
           <div *ngIf="pedido.estado == 'PENDIENTE'">
-            <ion-button (click)="redirectTo('producto/list')">EDITAR</ion-button>
+            <ion-button (click)="redirectTo('producto/lista')">EDITAR</ion-button>
             <ion-button (click)="clickPendiente(pedido)">CONFIRMAR</ion-button>
           </div>
 
-          <div *ngIf="pedido.estado == 'ACEPTADO'">
+          <div *ngIf="pedido.estado == 'ENTREGADO'">
             <ion-button (click)="clickRecibido(pedido)">RECIBIDO</ion-button>
           </div>
 
-          <div *ngIf="pedido.estado == 'ACEPTADO' && pedido.descuento == 'NO JUGO'">
+          <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO') && pedido.descuento == 'NO JUGO'">
             <br>
             <p>¿Le interesa ganar un descuento del 10% en su pedido? haz click aquí:</p>
             <ion-button (click)="clickJuego(pedido)">JUGAR</ion-button>
           </div>
 
-          <div *ngIf="pedido.estado == 'CONFIRMADO'">
-            <ion-button (click)="clickCobrar(pedido)">PAGAR</ion-button>
-          </div>
 
-          <div *ngIf="pedido.estado == 'COBRADO'">
+
+          <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO' || pedido.estado == 'COBRAR' || pedido.estado == 'COBRADO') && !pedido.encuestado">
             <br>
             <p>¿Le interesa ser parte de una breve encuesta?</p>
             <ion-button (click)="redirectTo('encuesta/cliente')">PARTICIPAR</ion-button>
           </div>
 
+          <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO' || pedido.estado == 'COBRAR' || pedido.estado == 'COBRADO') && pedido.encuestado">
+            <br>
+            <p>Podes ver los resultados de las encuestas!</p>
+            <!-- <ion-button (click)="redirectTo('encuesta/cliente')">VER</ion-button> -->
+            <ion-button >VER</ion-button>
+          </div>
+
+          <!-- Esto tendria que abrir una pantalla, donde se visualicen los detalles de los costos, y deje poner propina -->
+          <div *ngIf="pedido.estado == 'CONFIRMADO'">
+            <br>
+            <p>Si terminaste de comer, podes pedir tu cuenta!</p>
+            <ion-button (click)="clickPedirCuenta()">PEDIR CUENTA</ion-button>
+          </div>
+
+          <br>
+
         </ion-card>
       </div>
+
+
+
+      <!-- Visualizacion de la cuenta -->
+      <div class="container-cards container-resume" *ngIf="this.pedirCuenta">
+        <ion-card>
+          <p *ngIf="pedido.descuento == 'GANO'">MONTO DESCONTADO: {{ this.getAcum() * 0.1 | currency}}</p>
+          <p *ngIf="pedido.descuento != 'GANO'">MONTO DESCONTADO: $0.00</p>
+          <p>PROPINA: {{ this.propina | currency}}</p>
+          <p *ngIf="pedido.descuento == 'GANO'">MONTO TOTAL:  {{ this.getAcum(pedido) + this.propina | currency }} </p>
+          <p *ngIf="pedido.descuento != 'GANO'">MONTO TOTAL:  {{ this.getAcum() + this.propina | currency }} </p>
+
+
+          <ion-button (click)="agregarPropina()">ESCANEAR PROPINA</ion-button><br>
+          <ion-button (click)="clickCobrar(pedido)">PAGAR</ion-button>
+          <ion-button (click)="clickCancelarCuenta()">VOLVER</ion-button>
+          <br>
+          <!-- <ion-button (click)="setPropinaTestear('0')">0%</ion-button>
+          <ion-button (click)="setPropinaTestear('5')">5%</ion-button>
+          <ion-button (click)="setPropinaTestear('10')">10%</ion-button>
+          <ion-button (click)="setPropinaTestear('15')">15%</ion-button>
+          <ion-button (click)="setPropinaTestear('20')">20%</ion-button> -->
+
+
+          <br>
+          <br>
+
+        </ion-card>
+      </div>
+
+
 
     </div>
 

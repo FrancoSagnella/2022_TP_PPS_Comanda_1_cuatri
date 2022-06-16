@@ -17,6 +17,16 @@ export class IdComponent implements OnInit {
 
   pedido$: Observable<any>;
   table$: Observable<any>
+  pedirCuenta:boolean = false;
+  propina:number = 0;
+
+
+  private options = {
+    prompt: "Escaneá el QR",
+    formats: 'PDF_417, QR_CODE',
+    showTorchButton: true,
+    resultDisplayDuration: 2,
+  };
 
   constructor(
     private vibration: Vibration,
@@ -57,6 +67,61 @@ export class IdComponent implements OnInit {
   clickCobrar(pedido: Pedido) {
     pedido.estado = 'COBRAR';
     this.myWeirdNotification(pedido, 'Gracias por informar, en breves se le acercará un mozo!');
+  }
+
+  clickPedirCuenta()
+  {
+    this.pedirCuenta = true;
+  }
+
+  clickCancelarCuenta()
+  {
+    this.pedirCuenta = false;
+  }
+
+  agregarPropina()
+  {
+    this.qrProducto.scan(this.options).then(barcodeData => {
+      const datos = barcodeData.text;
+      switch(datos){
+        case 'MALO':
+          this.propina = 0;
+            break;
+        case 'REGULAR':
+          this.propina = this.getAcum() * 0.05;
+            break;
+        case 'BUENO':
+          this.propina = this.getAcum() * 0.1;
+            break;
+        case 'MUY BUENO':
+          this.propina = this.getAcum() * 0.15;
+            break;
+        case 'EXCELENTE':
+          this.propina = this.getAcum() * 0.2;
+            break;
+      }
+    });
+  }
+
+  setPropinaTestear(datos)
+  {
+    switch(datos){
+      case '0':
+        this.propina = 0;
+          break;
+      case '5':
+        this.propina = this.getAcum() * 0.05;
+          break;
+      case '10':
+        this.propina = this.getAcum() * 0.1;
+          break;
+      case '15':
+        this.propina = this.getAcum() * 0.15;
+          break;
+      case '20':
+        this.propina = this.getAcum() * 0.2;
+          break;
+    }
   }
 
   getAcum(pedido?: Pedido) {
@@ -184,6 +249,7 @@ export class IdComponent implements OnInit {
   clickJuego(pedido: Pedido) {
     this.redirectTo('/game/' + pedido.id);
   }
+
 
 
 }
