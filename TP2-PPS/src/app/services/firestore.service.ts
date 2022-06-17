@@ -67,4 +67,8 @@ export class FirestoreService {
     return this.encuestas;
   }
 
+  guardarToken(user:any, token:any){
+    console.log(user);
+    this.firestore.collection('usuarios').doc(user.id).update({token:token});
+  }
 }

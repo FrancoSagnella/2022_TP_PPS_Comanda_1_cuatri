@@ -5,7 +5,14 @@
 	"bundledWebRuntime": false,
   "plugins": {
 		"SplashScreen": {
-			"launchAutoHide": false
+			"launchAutoHide": false,
+			"PushNotifications": {
+				"presentationOptions": ["badge", "sound", "alert"]
+			  }
 		}
-	}
+	},
+	
+	"LocalNotifications":{
+        "sound": "sound.mp3"
+      }
 }

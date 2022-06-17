@@ -10,6 +10,7 @@ import { FotoService } from 'src/app/services/foto.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { Vibration } from '@ionic-native/vibration/ngx';
+import { PushService } from 'src/app/services/push-service.service';
 @Component({
   selector: 'app-alta-anonimo',
   templateUrl: './alta-anonimo.component.html',
@@ -42,7 +43,8 @@ export class AltaAnonimoComponent implements OnInit {
     private fs: FirestoreService,
     private userService: UsuariosService,
     private fotoService: FotoService,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private push : PushService
   ) { }
 
 
@@ -170,5 +172,24 @@ export class AltaAnonimoComponent implements OnInit {
       });
     }
     toast.present();
+  }
+
+  sendPush() {
+    console.log("asd");
+    this.push
+      .sendPushNotification({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        registration_ids: [
+          // eslint-disable-next-line max-len
+          '',
+        ],
+        notification: {
+          title: 'Nuevo cliente',
+          body: 'Hay un nuevo cliente esperando a ser habilitado.',
+        },
+      })
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 }
