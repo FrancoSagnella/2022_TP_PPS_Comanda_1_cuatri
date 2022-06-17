@@ -31,6 +31,46 @@ GAMMA: Aguilera Kevin<br>
     </tr>
   </tbody>
 </table>
+<br><br><br>
+PROPINAS
+<table>
+  <thead>
+    <th>BUENO</th>
+    <th>EXCELENTE</th>
+    <th>MALO</th>
+      <th>MUY BUENO</th>    
+	<th>REGULAR</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <a target="_blank" rel="noopener noreferrer" >
+	        <img src="https://github.com/FrancoSagnella/2022_TP_PPS_Comanda_1_cuatri/blob/main/QRs/propina/BUENO.png" alt="" width="200">
+        </a>
+      </td>
+      <td>
+        <a target="_blank" rel="noopener noreferrer" href="">
+	        <img src="https://github.com/FrancoSagnella/2022_TP_PPS_Comanda_1_cuatri/blob/main/QRs/propina/EXCELENTE.png" alt="" width="200">
+        </a>
+      </td>
+      <td>
+        <a target="_blank" rel="noopener noreferrer" href="">
+	        <img src="https://github.com/FrancoSagnella/2022_TP_PPS_Comanda_1_cuatri/blob/main/QRs/propina/MALO.png" alt="" width="200">
+        </a>
+      </td>
+	    <td>
+        <a target="_blank" rel="noopener noreferrer" >
+	        <img src="https://github.com/FrancoSagnella/2022_TP_PPS_Comanda_1_cuatri/blob/main/QRs/propina/MUY BUENO.png" alt="" width="200">
+        </a>
+      </td>
+	    <td>
+        <a target="_blank" rel="noopener noreferrer" >
+	        <img src="https://github.com/FrancoSagnella/2022_TP_PPS_Comanda_1_cuatri/blob/main/QRs/propina/REGULAR.png" alt="" width="200">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 PROGRESO:<br>
 --------------------------
 SEMANA 1 21/05 - 27/05<br>
