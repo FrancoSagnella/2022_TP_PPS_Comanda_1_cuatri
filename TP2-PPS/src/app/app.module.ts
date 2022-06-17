@@ -25,8 +25,11 @@ import { ListComponent } from './paginas/wait/list/list.component';
 import { ChatComponent } from './paginas/chat/chat.component';
 import { ChatMozoComponent } from './paginas/chat-mozo/chat-mozo.component';
 import { IdComponent } from './paginas/game/id/id.component';
+import { ChartModule } from 'angular-highcharts';
+import { GraficoComponent } from './grafico/grafico.component';
 import { Juego15Component } from './paginas/game/juego15/juego15.component';
 import { Juego20Component } from './paginas/game/juego20/juego20.component';
+
 
 
 @NgModule({
@@ -38,6 +41,7 @@ import { Juego20Component } from './paginas/game/juego20/juego20.component';
     ChatComponent,
     ChatMozoComponent,
     IdComponent,
+    GraficoComponent
     Juego15Component,
     Juego20Component,
   ],
@@ -51,6 +55,7 @@ import { Juego20Component } from './paginas/game/juego20/juego20.component';
             UsuariosModule,
             MesaModule,
             BrowserAnimationsModule,
+            ChartModule,
             ToastrModule.forRoot({
               positionClass: 'toast-top-center',
               preventDuplicates: true,
