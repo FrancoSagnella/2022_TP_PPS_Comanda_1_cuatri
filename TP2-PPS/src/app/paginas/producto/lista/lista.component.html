@@ -1,10 +1,10 @@
 <!-- <ion-header>
   <ion-toolbar>
-    
+
     <ion-back-button (click)="navigateBack()" slot="start"></ion-back-button>
     <ion-title size="small">Listado de Productos</ion-title>
     <ion-icon slot="end" name="qr-code-outline" (click)="ScanQr()" style="font-size: 2em; margin-right: 0.5em;"></ion-icon>
-  
+
   </ion-toolbar>
 </ion-header> -->
 
@@ -16,22 +16,23 @@
         <thead>
           <tr>
             <th> </th>
-            <th><p>NOMBRE</p></th>
-            <th><p>PRECIO</p></th>
-            <th><p>CANTIDAD</p></th>
+            <th><p style="font-size: 18px;">NOMBRE</p></th>
+            <th><p style="font-size: 18px;">PRECIO</p></th>
+            <th><p style="font-size: 18px;">CANTIDAD</p></th>
           </tr>
         </thead>
 
         <tbody>
           <tr *ngFor="let product of this.list$ | async">
-            <td (click)="clickDetails(product)"> 👁️ </td>
-            <td><p>{{ product.nombreProducto }}</p></td>
-            <td><p>{{product.precio | currency }}</p></td>
+            <!-- <td (click)="clickDetails(product)"> 👁️ </td> -->
+            <td><ion-button (click)="clickDetails(product)">Ver</ion-button></td>
+            <td><p style="font-size: 20px;">{{ product.nombreProducto }}</p></td>
+            <td><p style="font-size: 20px;">{{product.precio | currency }}</p></td>
 
-            <td> 
+            <td>
               <div class="container-btn">
                 <ion-button id="btn-add" (click)="setQuantity(product, '+')">+</ion-button>
-                <p>{{ getQuantity(product) }}</p>
+                <p style="font-size: 15px;">{{ getQuantity(product) }}</p>
                 <ion-button id="btn-less" (click)="setQuantity(product, '-')">-</ion-button>
               </div>
             </td>
@@ -44,8 +45,8 @@
 
   <div (click)="clickBeforeConfirm()" *ngIf="this.getAcum() > 0" class="container-cards container-resume">
     <ion-card>
-      <p>VER PEDIDO ({{ this.getAcum() | currency }} )</p>
-      <p>TIEMPO ESTIMADO: {{ this.getAproxFinish() }} minutos</p>
+      <p style="font-size: 23px;">VER PEDIDO <br><br> PRECIO: ({{ this.getAcum() | currency }} )</p>
+      <p style="font-size: 23px;">TIEMPO ESTIMADO: {{ this.getAproxFinish() }} minutos</p>
     </ion-card>
   </div>
 

@@ -25,14 +25,14 @@
       <ion-row>
 
         <ion-col col-12>
-          <p align="center" style="font-size: 13px;">INGRESE UN RANGO DEL 1 AL 10</p>
+          <p align="center" style="font-size: 13px;">DEL 1 AL 10</p>
           <ion-range color="dark" min="1" max="10" pin="true" class="rango" id="rango">
             <ion-icon range-left name="sad"></ion-icon>
             <ion-icon range-right name="happy"></ion-icon>
           </ion-range>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <!-- <ion-row>
         <ion-col col-12>
            <hr />
           <p style="font-size: 15px;">¿EN QUE DEBERIAMOS MEJORAR?</p>
@@ -44,12 +44,12 @@
           <ion-input placeholder="Escriba su opinión" [(ngModel)]="opinion"></ion-input>
         </ion-item>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
 
       <ion-row>
         <ion-col col-12>
           <hr />
-          <p style="font-size: 15px;">¿EL LOCAL CUENTA CON PROTOCOLO CONTRA EL CORONAVIRUS?</p>
+          <p style="font-size: 15px;">¿EL LOCAL CUMPLE EL PROTOCOLO POR COVID-19?</p>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -71,7 +71,7 @@
       <ion-row>
         <ion-col col-12>
           <hr />
-          <p style="font-size: 15px;">¿QUE ES LO MAS DESTACABLE DE NUESTRO LOCAL?</p>
+          <p style="font-size: 15px;">¿QUE LE GUSTO MAS DEL LOCAL?</p>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -80,10 +80,10 @@
             <p style="font-size: 13px;">Elija una opción</p>
 
             <ion-select id="select">
-              <ion-select-option value="Calidad">Calidad</ion-select-option>
-              <ion-select-option value="Velocidad">Velocidad</ion-select-option>
-              <ion-select-option value="Atención">Atención</ion-select-option>
-              <ion-select-option value="Higiene">Higiene</ion-select-option>
+              <ion-select-option value="Calidad">La comida</ion-select-option>
+              <ion-select-option value="Atención">La atención</ion-select-option>
+              <ion-select-option value="Velocidad">La velocidad</ion-select-option>
+              <!-- <ion-select-option value="Higiene">La higiene</ion-select-option> -->
             </ion-select>
 
           </ion-item>
@@ -93,7 +93,7 @@
       <ion-row>
         <ion-col col-12>
           <hr />
-          <p style="font-size: 15px;">TU MESA CONTABA CON:</p>
+          <p style="font-size: 15px;">A TU MESA LE FALTABA...:</p>
         </ion-col>
       </ion-row>
       <ion-row class="checkBox">
@@ -102,10 +102,10 @@
             <ion-label>Sal</ion-label>
             <ion-checkbox color="dark" id="chkSal"></ion-checkbox>
           </ion-item>
-          <ion-item>
+          <!-- <ion-item>
             <ion-label>Escarbadientes</ion-label>
             <ion-checkbox color="dark" id="chkEscarbadientes"></ion-checkbox>
-          </ion-item>
+          </ion-item> -->
           <ion-item>
             <ion-label>Servilletas</ion-label>
             <ion-checkbox color="dark" id="chkServilletas"></ion-checkbox>
