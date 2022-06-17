@@ -92,11 +92,11 @@ SEMANA 2 28/05 - 5/06<br>
    TAREAS DE BETA:<br>
      - Alta de empleados - listo<br>
      - Animacion splash - listo<br>
-     - Alta de Mesa - pendiente<br>
+     - Alta de Mesa - Hecho<br>
    TAREAS DE GAMMA<br>
      - Alta de clientes - listo<br>
      - Estilos - listo<br>
-     - Alta de productos - pendiente<br>
+     - Alta de productos - Hecho<br>
 
 
 SEMANA 3 5/06 - 11/06<br>
