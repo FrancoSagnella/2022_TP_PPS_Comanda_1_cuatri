@@ -72,7 +72,7 @@
           <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO' || pedido.estado == 'COBRAR' || pedido.estado == 'COBRADO') && pedido.encuestado">
             <br>
             <p style="font-size: 23px;">Podes ver los resultados de las encuestas!</p>
-            <!-- <ion-button (click)="redirectTo('encuesta/cliente')">VER</ion-button> -->
+            <ion-button (click)="redirectTo('grafico')">VER</ion-button>
             <ion-button >VER</ion-button>
           </div>
 

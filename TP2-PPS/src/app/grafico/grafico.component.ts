@@ -75,7 +75,7 @@ export class GraficoComponent implements OnInit {
                 satisfecho.push({puntos:data.rangoSatisfecho, cant:1});
               }
             }
-        
+
 
       });
 
@@ -92,8 +92,8 @@ console.log(this.listadoSatisfecho)
   crearGrafico()
   {
     let respuesta:any[] = [];
-    let cantidad:any[] = []; 
-    let total:any;   
+    let cantidad:any[] = [];
+    let total:any;
     let hola:any[]=[]
 
     this.listadoSal.forEach(element => {
@@ -106,7 +106,7 @@ console.log(this.listadoSatisfecho)
         respuesta.push("No");
         verdadero='No'
       }
-      
+
       hola.push([verdadero,element.cant])
       cantidad.push(element.cant);
     });
@@ -159,12 +159,12 @@ console.log(this.listadoSal)
       }
       //alert(estrellas)
         respuesta.push(element.puntos);
-      
+
         hola.push([estrellas,element.cant])
 
       cantidad.push(element.cant);
     });
 
-    this.chartSatisfecho = this.grafico.crearGraficoBarras(respuesta, hola, '¿Calificacion del establecimiento (del 1 al 5)⭐?', 'puntaje', 'cantidad de votos', 'Respuestas');
+    this.chartSatisfecho = this.grafico.crearGraficoBarras(respuesta, hola, '¿Calificacion del establecimiento (del 1 al 10)⭐?', 'puntaje', 'cantidad de votos', 'Respuestas');
   }
 }

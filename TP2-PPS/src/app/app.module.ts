@@ -41,7 +41,7 @@ import { Juego20Component } from './paginas/game/juego20/juego20.component';
     ChatComponent,
     ChatMozoComponent,
     IdComponent,
-    GraficoComponent
+    GraficoComponent,
     Juego15Component,
     Juego20Component,
   ],

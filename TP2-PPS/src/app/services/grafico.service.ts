@@ -55,16 +55,16 @@ export class GraficoService {
 
           }
       },
-      legend: {
-          layout: 'vertical',
-          align: 'right',
-          verticalAlign: 'top',
-          x: -40,
-          y: 80,
-          floating: true,
-          borderWidth: 1,
-          shadow: true
-      },
+      // legend: {
+      //     layout: 'vertical',
+      //     align: 'right',
+      //     verticalAlign: 'top',
+      //     x: -40,
+      //     y: 80,
+      //     floating: true,
+      //     borderWidth: 1,
+      //     shadow: true
+      // },
       credits: {
           enabled: false
       },
