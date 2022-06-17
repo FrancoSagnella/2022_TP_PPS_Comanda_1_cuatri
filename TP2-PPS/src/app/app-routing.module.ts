@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { GraficoComponent } from './grafico/grafico.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ChatMozoComponent } from './paginas/chat-mozo/chat-mozo.component';
 import { ChatComponent } from './paginas/chat/chat.component';
@@ -38,11 +37,9 @@ const routes: Routes = [
   {path:'wait/list', component:ListComponent},
   {path:'chat', component:ChatComponent},
   {path:'chatMozo', component:ChatMozoComponent},
-  {path:'grafico', component:GraficoComponent},
   {path:'game/:id', component:IdComponent},
   {path:'juego15/:id', component:Juego15Component},
   {path:'juego20/:id', component:Juego20Component},
-
   {path:'**', redirectTo:'login', pathMatch:'full'},
 ];
 @NgModule({
