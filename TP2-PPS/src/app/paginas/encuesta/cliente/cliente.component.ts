@@ -58,7 +58,8 @@ export class ClienteComponent implements OnInit {
     var protocoloCovid = (<HTMLIonRadioGroupElement>document.getElementById("grupo")).value == "true";
     var selectString = (<HTMLIonSelectElement>document.getElementById("select")).value;
     var mesaConSal = (<HTMLIonCheckboxElement>document.getElementById("chkSal")).checked;
-    var mesaConEscarbadientes = (<HTMLIonCheckboxElement>document.getElementById("chkEscarbadientes")).checked;
+    // var mesaConEscarbadientes = (<HTMLIonCheckboxElement>document.getElementById("chkEscarbadientes")).checked;
+    var mesaConEscarbadientes = false;
     var mesaConServilletas = (<HTMLIonCheckboxElement>document.getElementById("chkServilletas")).checked;
     var mesaConAderezos = (<HTMLIonCheckboxElement>document.getElementById("chkAderezos")).checked;
     var clienteNombre = this.user.nombre;
@@ -83,7 +84,7 @@ export class ClienteComponent implements OnInit {
     request.encuestado = true;
     request.date_updated = new Date().getTime();
     this.pedidoService.setOne(request);
-    localStorage.removeItem('products');
+    // localStorage.removeItem('products');
 
     this.toastr.presentToast('Gracias por tu opinión!', 2000, 'success', 'Encuesta');
     // this.toastr.success('Muchas gracias por tu opinion!!', 'Encuesta enviada');

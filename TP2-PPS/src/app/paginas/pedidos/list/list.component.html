@@ -30,7 +30,7 @@
                       <ion-button *ngIf="req.estado == 'COCINADO'" (click)="setStatus(req, 'ENTREGADO')">Entregar</ion-button>
                     </th>
                     <th>
-                      <p>{{ this.getQuestion(req.estado) }}</p>
+                      <!-- <p>{{ this.getQuestion(req.estado) }}</p> -->
                     </th>
                     <th></th>
                     <th *ngIf="req.estado == 'PENDIENTE'">
@@ -44,7 +44,8 @@
 
                 <tbody>
                   <tr *ngFor="let product of req.producto_id">
-                    <td (click)="clickDetails(product)"> 👁️ </td>
+                    <!-- <td (click)="clickDetails(product)"> 👁️ </td> -->
+                    <td><ion-button (click)="clickDetails(product)">Ver</ion-button></td>
                     <td>
                       <p>{{ product.nombreProducto }}</p>
                     </td>
@@ -107,7 +108,8 @@
 
                 <tbody>
                   <tr *ngFor="let product of req.producto_id">
-                    <td (click)="clickDetails(product)"> 👁️ </td>
+                    <!-- <td (click)="clickDetails(product)"> 👁️ </td> -->
+                    <td><ion-button (click)="clickDetails(product)">Ver</ion-button></td>
                     <td>
                       <p>{{ product.nombreProducto }}</p>
                     </td>

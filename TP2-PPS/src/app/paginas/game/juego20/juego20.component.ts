@@ -14,9 +14,9 @@ import { ToastService } from 'src/app/services/toast.service';
 export class Juego20Component implements OnInit {
 
   srcBase: string = "../../../../assets/juegos/";
-  srcPiedra: string = this.srcBase + "piedra.jpg";
-  srcPapel: string = this.srcBase + "papel.jpg";
-  srcTijera: string = this.srcBase + "tijera.jpg";
+  srcPiedra: string = this.srcBase + "piedra.png";
+  srcPapel: string = this.srcBase + "papel.png";
+  srcTijera: string = this.srcBase + "tijera.png";
   srcIncognita: string;
   srcResultado: string;
   bloquear: boolean;
@@ -84,11 +84,11 @@ export class Juego20Component implements OnInit {
         break;
       case 1:
         this.triunfos++;
-        this.srcResultado = this.srcBase + "ganar.jpg";
+        this.srcResultado = this.srcBase + "ganar.png";
         break;
       case 2:
         this.derrotas++;
-        this.srcResultado = this.srcBase + "perder.jpg";
+        this.srcResultado = this.srcBase + "perder.png";
         break;
     }
 
@@ -109,7 +109,7 @@ export class Juego20Component implements OnInit {
 
       this.pedidosSrv.setOne(pedido);
       // this.toastr.success("!Ganaste! Se te aplicara un 10% de descuento", "Resultado Final")
-      this.toastr.presentToast('Ganaste, tenes un descuento del 10%', 2000, 'success', 'Resultado');
+      this.toastr.presentToast('Ganaste, tenes un descuento del 20%', 2000, 'success', 'Resultado');
       // let audio = new Audio('./assets/sounds/noti.mp3');
       // audio.play();
 
@@ -152,7 +152,7 @@ export class Juego20Component implements OnInit {
 
   setInitialStatus() {
     this.bloquear = false;
-    this.srcIncognita = this.srcBase + "incognita.jpg";
+    this.srcIncognita = this.srcBase + "incognita.png";
     this.srcResultado = "";
   }
 
