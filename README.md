@@ -65,7 +65,19 @@ SEMANA 3 5/06 - 11/06<br>
      - Gestion Ingresar al local - Hecho<br>
    TAREAS DE BETA:<br>
      - QR de la mesa - Hecho<br>
-     - GEstion Realizar Pedidos - Hecho a medias<br>
+     - GEstion Realizar Pedidos - Hecho<br>
    TAREAS DE GAMMA<br>
-     - QR de propina - pendiente<br>
-     - Gestion Confirmar Pedidos - pendiente<br>
+     - QR de propina - Hecho<br>
+     - Gestion Confirmar Pedidos - Hecho<br>
+     
+     
+     
+SEMANA 4 12/06 - 18/06<br>
+  TAREAS DE ALFA: <br>
+     - Encuestas - Hecho<br>
+     - Juegos - Hecho<br>
+   TAREAS DE BETA:<br>
+     - Graficos de encuestas - Hecho<br>
+     - Juegos - pendiente<br>
+   TAREAS DE GAMMA<br>
+     - Push Notification - Pendiente<br>
