@@ -17,6 +17,16 @@ export class IdComponent implements OnInit {
 
   pedido$: Observable<any>;
   table$: Observable<any>
+  pedirCuenta:boolean = false;
+  propina:number = 0;
+
+
+  private options = {
+    prompt: "Escaneá el QR",
+    formats: 'PDF_417, QR_CODE',
+    showTorchButton: true,
+    resultDisplayDuration: 2,
+  };
 
   constructor(
     private vibration: Vibration,
@@ -59,16 +69,98 @@ export class IdComponent implements OnInit {
     this.myWeirdNotification(pedido, 'Gracias por informar, en breves se le acercará un mozo!');
   }
 
+  clickPedirCuenta()
+  {
+    this.pedirCuenta = true;
+  }
+
+  clickCancelarCuenta()
+  {
+    this.pedirCuenta = false;
+  }
+
+  agregarPropina()
+  {
+    this.qrProducto.scan(this.options).then(barcodeData => {
+      const datos = barcodeData.text;
+      switch(datos){
+        case 'MALO':
+          this.propina = 0;
+            break;
+        case 'REGULAR':
+          this.propina = this.getAcum() * 0.05;
+            break;
+        case 'BUENO':
+          this.propina = this.getAcum() * 0.1;
+            break;
+        case 'MUY BUENO':
+          this.propina = this.getAcum() * 0.15;
+            break;
+        case 'EXCELENTE':
+          this.propina = this.getAcum() * 0.2;
+            break;
+      }
+    });
+  }
+
+  setPropinaTestear(datos)
+  {
+    switch(datos){
+      case '0':
+        this.propina = 0;
+          break;
+      case '5':
+        this.propina = this.getAcum() * 0.05;
+          break;
+      case '10':
+        this.propina = this.getAcum() * 0.1;
+          break;
+      case '15':
+        this.propina = this.getAcum() * 0.15;
+          break;
+      case '20':
+        this.propina = this.getAcum() * 0.2;
+          break;
+    }
+  }
+
   getAcum(pedido?: Pedido) {
     let a = 0;
-
+    let b = 0;
     this.getProductsSelected().forEach(p => { a += (p.quantity * p.precio) });
 
-    if(pedido && pedido.descuento == 'GANO'){
-      a = a - (a * 0.1);
+    if(pedido && pedido.descuento10 == 'GANO'){
+      b += (a * 0.1);
     }
 
-    return a;
+    if(pedido && pedido.descuento15 == 'GANO'){
+      b += (a * 0.15);
+    }
+
+    if(pedido && pedido.descuento20 == 'GANO'){
+      b += (a * 0.2);
+    }
+
+    return a-b;
+  }
+
+  getDescontado(pedido:Pedido)
+  {
+    let a = 0;
+    let b=0;
+    this.getProductsSelected().forEach(p => { a += (p.quantity * p.precio) });
+    if(pedido && pedido.descuento10 == 'GANO'){
+      b += (a * 0.1);
+    }
+
+    if(pedido && pedido.descuento15 == 'GANO'){
+      b += (a * 0.15);
+    }
+
+    if(pedido && pedido.descuento20 == 'GANO'){
+      b += (a * 0.2);
+    }
+    return b;
   }
 
   redirectTo(path: string) {
@@ -181,9 +273,18 @@ export class IdComponent implements OnInit {
      }*/
   }
 
-  clickJuego(pedido: Pedido) {
+  clickJuego10(pedido: Pedido) {
     this.redirectTo('/game/' + pedido.id);
   }
+
+  clickJuego15(pedido: Pedido) {
+    this.redirectTo('/juego15/' + pedido.id);
+  }
+
+  clickJuego20(pedido: Pedido) {
+    this.redirectTo('/juego20/' + pedido.id);
+  }
+
 
 
 }

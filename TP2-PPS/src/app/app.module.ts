@@ -27,6 +27,9 @@ import { ChatMozoComponent } from './paginas/chat-mozo/chat-mozo.component';
 import { IdComponent } from './paginas/game/id/id.component';
 import { ChartModule } from 'angular-highcharts';
 import { GraficoComponent } from './grafico/grafico.component';
+import { Juego15Component } from './paginas/game/juego15/juego15.component';
+import { Juego20Component } from './paginas/game/juego20/juego20.component';
+
 
 
 @NgModule({
@@ -39,6 +42,8 @@ import { GraficoComponent } from './grafico/grafico.component';
     ChatMozoComponent,
     IdComponent,
     GraficoComponent
+    Juego15Component,
+    Juego20Component,
   ],
 
   entryComponents: [],

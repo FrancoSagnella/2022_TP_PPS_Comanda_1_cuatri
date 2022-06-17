@@ -5,6 +5,9 @@ import { GraficoComponent } from './grafico/grafico.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ChatMozoComponent } from './paginas/chat-mozo/chat-mozo.component';
 import { ChatComponent } from './paginas/chat/chat.component';
+import { IdComponent } from './paginas/game/id/id.component';
+import { Juego15Component } from './paginas/game/juego15/juego15.component';
+import { Juego20Component } from './paginas/game/juego20/juego20.component';
 import { HomeComponent } from './paginas/home/home.component';
 import { AltaComponent } from './paginas/producto/alta/alta.component';
 
@@ -36,6 +39,10 @@ const routes: Routes = [
   {path:'chat', component:ChatComponent},
   {path:'chatMozo', component:ChatMozoComponent},
   {path:'grafico', component:GraficoComponent},
+  {path:'game/:id', component:IdComponent},
+  {path:'juego15/:id', component:Juego15Component},
+  {path:'juego20/:id', component:Juego20Component},
+
   {path:'**', redirectTo:'login', pathMatch:'full'},
 ];
 @NgModule({

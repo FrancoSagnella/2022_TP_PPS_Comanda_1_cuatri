@@ -7,11 +7,11 @@ import { PedidoService } from 'src/app/services/pedido.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
-  selector: 'app-id',
-  templateUrl: './id.component.html',
-  styleUrls: ['./id.component.scss'],
+  selector: 'app-juego20',
+  templateUrl: './juego20.component.html',
+  styleUrls: ['./juego20.component.scss'],
 })
-export class IdComponent implements OnInit {
+export class Juego20Component implements OnInit {
 
   srcBase: string = "../../../../assets/juegos/";
   srcPiedra: string = this.srcBase + "piedra.png";
@@ -95,7 +95,7 @@ export class IdComponent implements OnInit {
     if (this.derrotas >= 3) {
       // this.toastr.error("La maquina ganó, no hay descuento", "Resultado Final");
       this.toastr.presentToast('Perdiste, no hay descuento', 2000, 'danger', 'Resultado');
-      pedido.descuento10 = 'PERDIO';
+      pedido.descuento20 = 'PERDIO';
       this.pedidosSrv.setOne(pedido);
 
       // let audio = new Audio('./assets/sounds/noti.mp3');
@@ -105,11 +105,11 @@ export class IdComponent implements OnInit {
     }
     else if (this.triunfos >= 3) {
       pedido.date_updated = new Date().getTime();
-      pedido.descuento10 = 'GANO';
+      pedido.descuento20 = 'GANO';
 
       this.pedidosSrv.setOne(pedido);
       // this.toastr.success("!Ganaste! Se te aplicara un 10% de descuento", "Resultado Final")
-      this.toastr.presentToast('Ganaste, tenes un descuento del 10%', 2000, 'success', 'Resultado');
+      this.toastr.presentToast('Ganaste, tenes un descuento del 20%', 2000, 'success', 'Resultado');
       // let audio = new Audio('./assets/sounds/noti.mp3');
       // audio.play();
 
