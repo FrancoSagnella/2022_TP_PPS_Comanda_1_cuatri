@@ -25,6 +25,8 @@ import { ListComponent } from './paginas/wait/list/list.component';
 import { ChatComponent } from './paginas/chat/chat.component';
 import { ChatMozoComponent } from './paginas/chat-mozo/chat-mozo.component';
 import { IdComponent } from './paginas/game/id/id.component';
+import { ChartModule } from 'angular-highcharts';
+import { GraficoComponent } from './grafico/grafico.component';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { IdComponent } from './paginas/game/id/id.component';
     ListComponent,
     ChatComponent,
     ChatMozoComponent,
-    IdComponent
+    IdComponent,
+    GraficoComponent
   ],
 
   entryComponents: [],
@@ -47,6 +50,7 @@ import { IdComponent } from './paginas/game/id/id.component';
             UsuariosModule,
             MesaModule,
             BrowserAnimationsModule,
+            ChartModule,
             ToastrModule.forRoot({
               positionClass: 'toast-top-center',
               preventDuplicates: true,
