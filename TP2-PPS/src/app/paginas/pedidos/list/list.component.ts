@@ -80,16 +80,24 @@ export class ListComponent implements OnInit {
 
   getTotal(model: any) {
     let a = 0;
-
+    let b = 0;
     model.producto_id.forEach(p => {
       a += p.precio
     });
 
-    if (model.descuento == 'GANO') {
-      a = a - (a * 0.1);
+    if (model.descuento10 == 'GANO') {
+      b += (a * 0.1);
     }
 
-    return a;
+    if (model.descuento15 == 'GANO') {
+      b += (a * 0.15);
+    }
+
+    if (model.descuento20 == 'GANO') {
+      b += (a * 0.2);
+    }
+
+    return a-b;
   }
 
   setStatus(model: Pedido, status) {

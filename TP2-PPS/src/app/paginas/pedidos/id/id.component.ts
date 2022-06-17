@@ -126,14 +126,41 @@ export class IdComponent implements OnInit {
 
   getAcum(pedido?: Pedido) {
     let a = 0;
-
+    let b = 0;
     this.getProductsSelected().forEach(p => { a += (p.quantity * p.precio) });
 
-    if(pedido && pedido.descuento == 'GANO'){
-      a = a - (a * 0.1);
+    if(pedido && pedido.descuento10 == 'GANO'){
+      b += (a * 0.1);
     }
 
-    return a;
+    if(pedido && pedido.descuento15 == 'GANO'){
+      b += (a * 0.15);
+    }
+
+    if(pedido && pedido.descuento20 == 'GANO'){
+      b += (a * 0.2);
+    }
+
+    return a-b;
+  }
+
+  getDescontado(pedido:Pedido)
+  {
+    let a = 0;
+    let b=0;
+    this.getProductsSelected().forEach(p => { a += (p.quantity * p.precio) });
+    if(pedido && pedido.descuento10 == 'GANO'){
+      b += (a * 0.1);
+    }
+
+    if(pedido && pedido.descuento15 == 'GANO'){
+      b += (a * 0.15);
+    }
+
+    if(pedido && pedido.descuento20 == 'GANO'){
+      b += (a * 0.2);
+    }
+    return b;
   }
 
   redirectTo(path: string) {
@@ -246,8 +273,16 @@ export class IdComponent implements OnInit {
      }*/
   }
 
-  clickJuego(pedido: Pedido) {
+  clickJuego10(pedido: Pedido) {
     this.redirectTo('/game/' + pedido.id);
+  }
+
+  clickJuego15(pedido: Pedido) {
+    this.redirectTo('/juego15/' + pedido.id);
+  }
+
+  clickJuego20(pedido: Pedido) {
+    this.redirectTo('/juego20/' + pedido.id);
   }
 
 

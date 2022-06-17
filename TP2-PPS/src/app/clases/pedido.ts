@@ -7,7 +7,10 @@ export class Pedido {
     date_updated: number;
     estado: 'PENDIENTE' | 'CANCELADO' | 'ACEPTADO' | 'PREPARACION' | 'COCINADO' | 'ENTREGADO' | 'CONFIRMADO' | 'COBRAR' | 'COBRADO' | 'ENCUESTADO';
     encuestado: boolean;
-    descuento: 'NO JUGO' | 'GANO' | 'PERDIO';
+    descuento10: 'NO JUGO' | 'GANO' | 'PERDIO';
+    descuento15: 'NO JUGO' | 'GANO' | 'PERDIO';
+    descuento20: 'NO JUGO' | 'GANO' | 'PERDIO';
+
 }
 
 //  PENDIENTE: metre es quien asignará este estado, cuando ingresa cliente al local, luego cuando hace el pedido aparece en el lsitado del mozo.
