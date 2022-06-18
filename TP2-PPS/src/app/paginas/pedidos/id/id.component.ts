@@ -6,6 +6,7 @@ import { NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { Pedido } from 'src/app/clases/pedido';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { PushNotificationService } from 'src/app/services/push-notification.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -35,8 +36,8 @@ export class IdComponent implements OnInit {
     private pedidoService: PedidoService,
     private router: Router,
     private qrProducto: BarcodeScanner,
-    public navCtrl: NavController
-
+    public navCtrl: NavController,
+    private pnService:PushNotificationService
   ) {
 
   }
@@ -56,16 +57,19 @@ export class IdComponent implements OnInit {
 
   clickPendiente(pedido: Pedido) {
     pedido.producto_id = this.getProductsSelected();
+    this.pnService.enviarNotificacionUsuarios('MOZO', 'Pedido', 'Un cliente realizó un pedido', true);
     this.myWeirdNotification(pedido, 'Pedido registrado con éxito!');
   }
 
   clickRecibido(pedido: Pedido) {
     pedido.estado = 'CONFIRMADO';
+    this.pnService.enviarNotificacionUsuarios('MOZO', 'Pedido', 'Un cliente confirmo la recepcion de un pedido', true);
     this.myWeirdNotification(pedido, 'Gracias por confirmar recepción!');
   }
 
   clickCobrar(pedido: Pedido) {
     pedido.estado = 'COBRAR';
+    this.pnService.enviarNotificacionUsuarios('MOZO', 'Pedido', 'Un cliente pidió la cuenta', true);
     this.myWeirdNotification(pedido, 'Gracias por informar, en breves se le acercará un mozo!');
   }
 

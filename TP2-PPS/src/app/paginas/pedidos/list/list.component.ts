@@ -7,6 +7,7 @@ import { Producto } from 'src/app/clases/producto';
 import { WaitList } from 'src/app/clases/waitList';
 import { MesaService } from 'src/app/services/mesa.service';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { PushNotificationService } from 'src/app/services/push-notification.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { WaitService } from 'src/app/services/wait.service';
 
@@ -35,7 +36,8 @@ export class ListComponent implements OnInit {
     private tblService: MesaService,
     private waitService: WaitService,
     private toastr: ToastService,
-    private router: Router
+    private router: Router,
+    private pnService: PushNotificationService
   ) { }
 
   ngOnInit() {
@@ -106,6 +108,22 @@ export class ListComponent implements OnInit {
 
     try {
       this.reqService.setOne(model);
+      switch(model.estado)
+      {
+        case 'ACEPTADO':
+          this.pnService.enviarNotificacionUsuarios('COCINERO', 'Pedido', 'Un pedido fue aceptado, se solicita preparacion', true);
+          this.pnService.enviarNotificacionUsuarios('BARTENDER', 'Pedido', 'Un pedido fue aceptado, se solicita preparacion', true);
+          this.pnService.enviarNotificacionUsuarios('CLIENTE', 'Pedido', 'Su pedido fue aceptado');
+          break;
+        case 'PREPARACION':
+          this.pnService.enviarNotificacionUsuarios('CLIENTE', 'Pedido', 'Su pedido esta siendo preparado');
+          break;
+        case 'COCINADO':
+          this.pnService.enviarNotificacionUsuarios('CLIENTE', 'Pedido', 'Su pedido terminó de prepararse, en breves se le acercará un mozo');
+          this.pnService.enviarNotificacionUsuarios('MOZO', 'Pedido', 'Un pedido está listo para entregarse', true);
+
+          break;
+      }
 
       if (model.estado == 'COBRADO') {
 
