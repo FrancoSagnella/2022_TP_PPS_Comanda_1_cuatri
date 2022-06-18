@@ -29,7 +29,9 @@ import { ChartModule } from 'angular-highcharts';
 import { GraficoComponent } from './grafico/grafico.component';
 import { Juego15Component } from './paginas/game/juego15/juego15.component';
 import { Juego20Component } from './paginas/game/juego20/juego20.component';
-
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -61,7 +63,11 @@ import { Juego20Component } from './paginas/game/juego20/juego20.component';
               preventDuplicates: true,
               progressBar: true
             }),
-            ScannerModule],
+            ScannerModule,
+            provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+            provideFirestore(() => getFirestore()),
+            HttpClientModule,
+          ],
   providers: [Camera,BarcodeScanner,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
 
   bootstrap: [AppComponent],

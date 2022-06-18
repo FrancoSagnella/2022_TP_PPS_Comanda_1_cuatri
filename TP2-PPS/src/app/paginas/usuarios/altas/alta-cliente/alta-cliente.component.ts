@@ -14,6 +14,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
 import { ToastController } from '@ionic/angular';
 import { Vibration } from '@ionic-native/vibration/ngx';
+import { PushNotificationService } from 'src/app/services/push-notification.service';
 @Component({
   selector: 'app-alta-cliente',
   templateUrl: './alta-cliente.component.html',
@@ -24,6 +25,8 @@ export class AltaClienteComponent implements OnInit {
   private spinner = false;
 	fotoCargada: any;
  foto:any;
+  listaDuenios:any;
+  listaSupervisores:any;
 
  validationUserMessage = {
   nombre: [
@@ -59,7 +62,8 @@ export class AltaClienteComponent implements OnInit {
 }
   constructor(private fb:FormBuilder, private afs: AngularFirestore,private firestore:FirestoreService,private route:Router,
     private camera:Camera,private qr : BarcodeScanner,private storage: AngularFireStorage,public auth:AuthService,
-    private fotoService:FotoService, private usuariosService:UsuariosService,private toastr:ToastController,private vibration:Vibration
+    private fotoService:FotoService, private usuariosService:UsuariosService,private toastr:ToastController,private vibration:Vibration,
+    private pnService: PushNotificationService
     ) { }
   cliente:Cliente={id:'',correo:'',nombre:'',apellido:'',img:'',estado:'PENDIENTE',dni:0,fechaCreacion:0,perfil:'CLIENTE'};
 
@@ -86,6 +90,13 @@ export class AltaClienteComponent implements OnInit {
 
     });
 
+    this.usuariosService.getDuenios().subscribe(data => {
+      this.listaDuenios = data;
+    });
+
+    this.usuariosService.getSupervisores().subscribe(data => {
+      this.listaSupervisores = data;
+    });
   }
 
 
@@ -119,6 +130,12 @@ export class AltaClienteComponent implements OnInit {
           // this.vibration.vibrate([500]);
           // this.toastr.success('Datos guardados con éxito!', 'Registro de Usuario');
           this.presentToast('Datos guardados con exito', 2000, 'success', 'Alta exitosa');
+
+          // Envia notifications a los dueños/supervisores
+          this.pnService.enviarNotificacionUsuarios('DUENIO', 'Nuevo registro', 'Un nuevo cliente se registro, se encuentra pendiente de habilitación');
+          this.pnService.enviarNotificacionUsuarios('SUPERVISOR', 'Nuevo registro', 'Un nuevo cliente se registro, se encuentra pendiente de habilitación');
+
+
           this.spinner = false;
           this.route.navigateByUrl('usuarios/login');
           this.resetForm();
