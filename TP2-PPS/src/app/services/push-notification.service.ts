@@ -33,7 +33,7 @@ export class PushNotificationService {
   async inicializar(): Promise<void> {
     this.addListeners();
     // Verificamos que este en un dispositivo y no en una PC y tambien que el usuario no tegna seteado el token
-    if (this.platform.is('capacitor')) {
+    if (this.platform.is('capacitor') && typeof this.user.token === 'undefined') {
       const result = await PushNotifications.requestPermissions();
       if (result.receive === 'granted') {
         await PushNotifications.register();
