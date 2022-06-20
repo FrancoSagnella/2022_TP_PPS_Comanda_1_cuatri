@@ -17,6 +17,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
   public user;
   public hasWait;
   public hasRequest;
+  public verGraficos = false;
 
   private data: any;
 
@@ -85,6 +86,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
               this.toastr.presentToast('Ingresó al local, aguarde mientras se le asigna una mesa', 2000, 'success', 'Hecho');
               this.addToWaitList();
               this.pnService.enviarNotificacionUsuarios('METRE','Ingreso al local', 'Un Cliente solicitó la entrada al local', true);
+              this.verGraficos = true;
             }
             else if (this.hasWait.estado == 'PENDIENTE') {
 
@@ -96,7 +98,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
               // this.toastr.warning('Usted ya tiene una mesa reservada, por favor consulte al empleado más cercano', 'Lista de espera');
             }
             else if (this.hasWait.estado == 'FINALIZADO') {
-              this.toastr.presentToast('Chau', 2000, 'success', 'a');
+              this.toastr.presentToast('Ingresó al local, aguarde mientras se le asigna una mesa', 2000, 'success', 'Hecho');
               this.addToWaitList();
             }
             break;
@@ -254,5 +256,9 @@ export class ScannerComponent implements OnInit, OnDestroy {
         // this.toastr.warning('QR no perteneciente a ARM-Restaurante..', 'QR');
         break;
     }
+  }
+
+  redirectTo(path: string) {
+    this.router.navigate([path]);
   }
 }
