@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { MesaClienteService } from 'src/app/services/mesa-cliente.service';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { PushNotificationService } from 'src/app/services/push-notification.service';
 
 @Component({
   selector: 'app-chat',
@@ -31,6 +32,7 @@ export class ChatComponent implements OnInit {
     private authService:AuthService,
     private router:Router ,
     private mjeService: ChatService,
+    private pnService : PushNotificationService,
     private fb:FormBuilder  ) {
       this.mensaje="";
       this.bgSala = "container cont-chat";
@@ -93,6 +95,7 @@ export class ChatComponent implements OnInit {
 
       //  alert("mensaje nuevo");
       }
+      this.pnService.enviarNotificacionUsuarios('MOZO', 'Consulta', 'Un cliente realizó una consulta', true);
     });
     this.mensaje = "";
   }

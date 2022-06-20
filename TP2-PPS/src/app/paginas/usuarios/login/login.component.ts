@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { MailService } from 'src/app/services/mail.service';
+import { PushNotificationService } from 'src/app/services/push-notification.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -41,12 +42,12 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private vibration: Vibration,
-    private toastr: ToastController
-    ,
+    private toastr: ToastController,
     private formbuider: FormBuilder,
     private authService: AuthService,
     private userService: UsuariosService,
     private mailService: MailService,
+    private pnService: PushNotificationService
   ) { }
 
   ngOnInit() { this.validateForm(); }
@@ -94,6 +95,7 @@ export class LoginComponent implements OnInit {
           // this.vibration.vibrate([500]);
           localStorage.setItem('user', JSON.stringify(data));
           // this.toastr.success('Ingreso con éxito', 'Iniciar Sesión');
+          this.pnService.getUser(data);
           this.presentToast('Sesión iniciada', 2000, 'success', 'Inicio exitoso');
           this.redirectTo('/home');
         }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { WaitList } from 'src/app/clases/waitList';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { PushNotificationService } from 'src/app/services/push-notification.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { WaitService } from 'src/app/services/wait.service';
 
@@ -31,7 +32,8 @@ export class ScannerComponent implements OnInit, OnDestroy {
     private router: Router,
     private waitService: WaitService,
     private requestService: PedidoService,
-    private barcodeScanner: BarcodeScanner
+    private barcodeScanner: BarcodeScanner,
+    private pnService:PushNotificationService
   ) { }
 
   ngOnInit() {
@@ -80,8 +82,9 @@ export class ScannerComponent implements OnInit, OnDestroy {
         switch (this.data.name) {
           case 'ENTRADA':
             if (!this.hasWait) {
-              this.toastr.presentToast('Ingresó al locla, aguarde mientras se le asigna una mesa', 2000, 'success', 'Hecho');
+              this.toastr.presentToast('Ingresó al local, aguarde mientras se le asigna una mesa', 2000, 'success', 'Hecho');
               this.addToWaitList();
+              this.pnService.enviarNotificacionUsuarios('METRE','Ingreso al local', 'Un Cliente solicitó la entrada al local', true);
             }
             else if (this.hasWait.estado == 'PENDIENTE') {
 

@@ -16,7 +16,7 @@ export class MailService {
 
   notificationWelcome(model: Usuario) {
     let template = {
-        from: "La Comanda",
+        from_name: "La Comanda",
         to: model.correo,
         client_name: model.nombre,
         message: "Si recibió este correo electrónico significa que se ha registrado correctamente en La Comanda muchas gracias!",
@@ -40,10 +40,10 @@ notificationInabled(model: Usuario) {
 
 notificationStatus(model: Usuario) {
     let template = {
-        from: "La Comanda",
+        from_name: "La Comanda",
         to: model.correo,
         client_name: model.nombre,
-        message: "Usted se encuentra actualmente en estado " + model.estado + " para ingresar al local La Comanda",
+        message: "Usted se encuentra actualmente en estado " + model.estado + " para ingresar al local.",
     }
 
     try { emailjs.send(this.serviceID, this.templateID, template) }

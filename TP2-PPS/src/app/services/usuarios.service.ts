@@ -56,7 +56,27 @@ export class UsuariosService {
     return this.getByPerfil('ANONIMO') as Observable<Anonimo[]>;
   }
 
-  private getByPerfil(perfil: string) {
+  getMozos() {
+    return this.getByRol('MOZO') as Observable<Empleado[]>;
+  }
+
+  getCocineros() {
+    return this.getByRol('COCINERO') as Observable<Empleado[]>;
+  }
+
+  getMetres() {
+    return this.getByRol('METRE') as Observable<Empleado[]>;
+  }
+
+  public getByRol(rol: string) {
+    try {
+      return this.getAll().pipe(
+        map(users => users.filter(u => u.rol.includes(rol))));
+    }
+    catch (error) { }
+  }
+
+  public getByPerfil(perfil: string) {
     try {
       return this.getAll().pipe(
         map(users => users.filter(u => u.perfil.includes(perfil))));
