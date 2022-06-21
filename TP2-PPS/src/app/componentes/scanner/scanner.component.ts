@@ -89,7 +89,6 @@ export class ScannerComponent implements OnInit, OnDestroy {
               this.verGraficos = true;
             }
             else if (this.hasWait.estado == 'PENDIENTE') {
-
               this.toastr.presentToast('Ya solicitó ingreso al local, espere mientras se evalúa', 2000, 'danger', 'Espere');
               // this.toastr.warning('Previamente usted ya solicitó una mesa, en breves se le acercará un recepcionista', 'Lista de espera');
             }
@@ -187,11 +186,12 @@ export class ScannerComponent implements OnInit, OnDestroy {
     switch (data_name) {
       case 'ENTRADA':
         if (!this.hasWait) {
-          this.toastr.presentToast('Ingresó al locla, aguarde mientras se le asigna una mesa', 2000, 'success', 'Hecho');
+          this.toastr.presentToast('Ingresó al local, aguarde mientras se le asigna una mesa', 2000, 'success', 'Hecho');
           this.addToWaitList();
+          this.pnService.enviarNotificacionUsuarios('METRE','Ingreso al local', 'Un Cliente solicitó la entrada al local', true);
+          this.verGraficos = true;
         }
         else if (this.hasWait.estado == 'PENDIENTE') {
-
           this.toastr.presentToast('Ya solicitó ingreso al local, espere mientras se evalúa', 2000, 'danger', 'Espere');
           // this.toastr.warning('Previamente usted ya solicitó una mesa, en breves se le acercará un recepcionista', 'Lista de espera');
         }

@@ -131,6 +131,7 @@ export class PushNotificationService {
 
   enviarNotificacionUsuarios(perfil:string, titulo:string, body:string, rol:any = false)
   {
+    console.log('entra');
     let usuariosTokens: any[] = [];
     let sub:any;
     if(rol){
@@ -141,11 +142,12 @@ export class PushNotificationService {
     }
 
     let sub2 = sub.subscribe((data) => {
-      // console.log(data);
-      data.forEach(element => {
-        usuariosTokens.push(element.token);
-      });
-      // console.log('usuariosTokens', usuariosTokens);
+      console.log(data);
+        data.forEach(element => {
+          usuariosTokens.push(element.token);
+          console.log('token', element.token);
+        });
+        console.log('usuariosTokens', usuariosTokens);
       let push = this.sendPushNotification({
         registration_ids: usuariosTokens,
         notification:{

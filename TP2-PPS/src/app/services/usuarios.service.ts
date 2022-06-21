@@ -70,7 +70,7 @@ export class UsuariosService {
 
   public getByRol(rol: string) {
     try {
-      return this.getAll().pipe(
+      return this.getEmpleados().pipe(
         map(users => users.filter(u => u.rol.includes(rol))));
     }
     catch (error) { }
