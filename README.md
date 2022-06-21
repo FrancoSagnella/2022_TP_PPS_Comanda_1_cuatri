@@ -118,6 +118,6 @@ SEMANA 4 12/06 - 18/06<br>
      - Juegos - Hecho<br>
    TAREAS DE BETA:<br>
      - Graficos de encuestas - Hecho<br>
-     - Juegos - pendiente<br>
+     - Juegos - Hecho<br>
    TAREAS DE GAMMA<br>
-     - Push Notification - Pendiente<br>
+     - Push Notification - Hecho<br>
